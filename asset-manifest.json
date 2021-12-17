@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/955-scouting-pwa/static/css/main.107a21c1.css",
+    "main.js": "/955-scouting-pwa/static/js/main.7d787d31.js",
+    "static/js/787.735dfe9b.chunk.js": "/955-scouting-pwa/static/js/787.735dfe9b.chunk.js",
+    "service-worker.js": "/955-scouting-pwa/service-worker.js",
+    "index.html": "/955-scouting-pwa/index.html",
+    "main.107a21c1.css.map": "/955-scouting-pwa/static/css/main.107a21c1.css.map",
+    "main.7d787d31.js.map": "/955-scouting-pwa/static/js/main.7d787d31.js.map",
+    "787.735dfe9b.chunk.js.map": "/955-scouting-pwa/static/js/787.735dfe9b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.107a21c1.css",
+    "static/js/main.7d787d31.js"
+  ]
+}
