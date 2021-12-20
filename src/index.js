@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import 'bootstrap/dist/css/bootstrap.css';// css imports below here
@@ -16,5 +15,3 @@ ReactDOM.render(
 );
 
 serviceWorkerRegistration.register();
-
-reportWebVitals();
