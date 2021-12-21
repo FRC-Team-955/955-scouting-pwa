@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {sendScoutingData} from './api/firebase-api'
+import {sendScoutingData, getScoutingData} from './api/firebase-api'
 import QRCode from 'qrcode'
 import QrReader from 'react-qr-scanner'
 import './styles/App.css'
@@ -11,6 +11,8 @@ function App() {
 
   const [data, setData] = useState({text:'No Data'})
   const [showReader, setShowReader] = useState(false)
+
+  const [dataList, setDataList] = useState([])
 
   async function generateQR(text){
     try {
@@ -41,13 +43,21 @@ function App() {
         {showReader?
           <QrReader
           delay={100}
-          onScan={d => {setData(d); if(d !== null)setShowReader(false)}}
+          onScan={d => {setData(d); if(d !== null){setShowReader(false); setDataList([...dataList,{'team':d.text.split(',')[0], 'points':d.text.split(',')[1]}]);} }}
           onError={e => console.log(e)}
-          style={{height: 240,width: 240}}
+          style={{height: 240, width: 240}}
           legacyMode={true}
           /> : <></>
         }
         <p>{data?data.text:""}</p>
+        <hr/>
+
+        <h5>Past Matches</h5>
+        <button onClick={()=>getScoutingData(dataList).then(res => setDataList(res))} className='btn btn-primary'>Get Data From Cloud</button>
+        <ul>
+          {dataList.map((arr, i) => <li key={i}>Team: {arr.team}, Points: {arr.points}</li>)}
+        </ul>
+
       </div>
     </div>
   );

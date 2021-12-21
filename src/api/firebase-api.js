@@ -1,5 +1,5 @@
 import { db } from '../firebase-config';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
 
 export async function sendScoutingData(data){
     try {
@@ -11,4 +11,25 @@ export async function sendScoutingData(data){
       } catch (e) {
         console.error("Error adding document: ", e);
       }
+}
+
+export async function getScoutingData(currentData){
+    const ref = collection(db, "comp1")
+    const teamList = currentData.map((e)=> parseInt(e.team))
+    let q = 0
+    let docs = 0
+
+    if (teamList.length > 0){
+      q = query(ref, where("team", "not-in", teamList))
+      docs = await getDocs(q)
+    }else{
+      docs = await getDocs(ref);
+    }
+    
+    let out = []
+    docs.forEach(doc => {
+      out = [...out, {"team": doc.data().team, "points": doc.data().points}]
+    });
+
+    return [...currentData, ...out]
 }
