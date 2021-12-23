@@ -8,7 +8,7 @@ import {
   QuerySnapshot,
   DocumentData,
 } from "firebase/firestore";
-import { IDataList } from "../modles";
+import { IDataList } from "../models";
 
 export async function sendScoutingData(data) {
   try {

@@ -3,7 +3,7 @@ import { sendScoutingData, getScoutingData } from "./api/firebase-api";
 import QRCode from "qrcode";
 import QrReader from "react-qr-scanner";
 import "./styles/App.css";
-import { IDataList } from "./modles";
+import { IDataList } from "./models";
 
 function App() {
   interface IData {
