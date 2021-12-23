@@ -1,1 +1,0 @@
-Major compnets like navbar should get their own file here
