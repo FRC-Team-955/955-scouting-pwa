@@ -15,7 +15,7 @@ export async function getEventsFromWeek(week: number):Promise<any>{
       .then(res => res.json())
       .then(
         (result) => {
-          return result.filter(comp => comp.week === week-1) // week index starts at 0
+          return result.filter(comp => comp.week === week-1) // week index startskey: string at 0
         },
         (error) => {
           console.log(error)
@@ -24,14 +24,14 @@ export async function getEventsFromWeek(week: number):Promise<any>{
 }
 
 //returns a list of matches sorted by time
-export async function getMatchesFromEvent(comp: IEvent){ 
-    const id = comp.key
-
-    return fetch(`${api}/event/${id}/matches`, header )
+export async function getMatchesFromEventKey(key: string){ 
+  // console.log(key)
+    return fetch(`${api}/event/${key}/matches`, header )
         .then(res => res.json())
         .then(
             (result) => {
-              return result.sort((a, b) => a.time - b.time) //sorts array times from lowest to highest
+              let arr = result.sort((a, b) => a.time - b.time) //sorts array times from lowest to highest
+              return arr
             },
             (error) => {
                 console.log(error)
