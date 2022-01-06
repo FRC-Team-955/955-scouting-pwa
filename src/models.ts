@@ -62,7 +62,7 @@ export interface IMatchSchedule extends Array<IMatch> {}
 
 export interface IMatch {
   id: string;
-  matchType: "qualifier" | "playoff" | "other";
+  matchType: "qm" | "ef" | "qf" | "sf" | "f";
   matchNumber: number;
   time?: number;
   winning_alliance?: "red" | "blue";
