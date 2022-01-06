@@ -31,9 +31,9 @@ export default function Dashboard(){
         
     };
     const matchChange= (m) => {
-        console.log(m)
-        setEvent(m);
-        getMatchesFromEventKey(m).then(s => {
+        console.log(m.target.value)
+        setEvent(m.target.value);
+        getMatchesFromEventKey(m.target.value).then(s => {
             setMatchSchedule(s);
             
             // getMatchesFromEvent(e[0]).then(f => {setMatchSchedule(f); console.log(f)})

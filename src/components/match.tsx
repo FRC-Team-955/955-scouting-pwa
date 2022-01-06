@@ -12,7 +12,7 @@ const blue = matchData.alliances.blue.team_keys.map(x => x.substring(3));
 const red = matchData.alliances.red.team_keys.map(x => x.substring(3));
     return (
      
-<Card style={{ width: '20.5rem' , height: '8.6875rem'}}>
+<Card style={{ width: '20.5rem' , height: '8.6875rem' , margin: '1rem auto'}}>
   <Card.Body>
     <div className="font">
       <p>Match {matchData.match_number}</p>
