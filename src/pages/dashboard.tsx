@@ -69,6 +69,8 @@ export default function Dashboard() {
         </select>
       </div>
 
+      <hr />
+
       {showCsvViewer ? (
         <CsvViewer exit={() => setShowCsvViewer(false)} />
       ) : (

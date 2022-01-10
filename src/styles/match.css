@@ -1,141 +1,105 @@
-.frame1{
-   /* Frame 1 */
+.frame1 {
+  /* Frame 1 */
 
+  width: 328px;
+  height: 139px;
+  left: 16px;
+  top: 143px;
 
-position: absolute;
-width: 328px;
-height: 139px;
-left: 16px;
-top: 143px;
+  background: #ffffff;
+  /* Gray 5 */
 
-background: #FFFFFF;
-/* Gray 5 */
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  /* Match Card Drop Shadow */
 
-border: 1px solid #E0E0E0;
-box-sizing: border-box;
-/* Match Card Drop Shadow */
-
-box-shadow: 0px 5px 16px #F2F2F2;
-border-radius: 8px;
-  }
-.frame2{
-  position: absolute;
+  box-shadow: 0px 5px 16px #f2f2f2;
+  border-radius: 8px;
+}
+.frame2 {
   width: 90px;
   height: 33px;
   left: 16px;
   top: 41px;
-  
+
   background: rgba(47, 128, 237, 0.1);
   /* Blue 1 */
-  
-  border: 1px solid #2F80ED;
+
+  border: 1px solid #2f80ed;
   box-sizing: border-box;
   border-radius: 4px;
 }
-button{
-    
-    
-    border: 0 none;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+button {
+  border: 0 none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .primary {
-    background: #ff0000;
-    color: #ffffff;
+  background: #ff0000;
+  color: #ffffff;
 }
 
-
-
-
-
-
-
-.bluebutton
-{
-    
-    top: 2.5625rem;
-    text-align: center; 
-    background: rgba(47, 128, 237, 0.1);
-    border: 1px solid #2F80ED;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 5.625rem;
-    height: 2.0625rem;   
-    
-    
+.bluebutton {
+  top: 2.5625rem;
+  text-align: center;
+  background: rgba(47, 128, 237, 0.1);
+  border: 1px solid #2f80ed;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 5.625rem;
+  height: 2.0625rem;
 }
 
-.bluebutton:first-child
-{
-    
-    float: left;
-    position: absolute;
-    left: 1rem;
+.bluebutton:first-child {
+  float: left;
+  position: absolute;
+  left: 1rem;
 }
 
-.bluebutton:nth-child(2)
-{
-    
-    float: left;
-    position: absolute;
-    left: 7.4375rem;
+.bluebutton:nth-child(2) {
+  float: left;
+  position: absolute;
+  left: 7.4375rem;
 }
 
-.bluebutton:last-child
-{
-    
-    float: right;
-    position: absolute;
-   
-    right: 1rem;
+.bluebutton:last-child {
+  float: right;
+  position: absolute;
 
+  right: 1rem;
 }
 
-
-.redbutton
-{
-    
-    top: 5.625rem;
-    text-align: center; 
-    background: rgba(235, 87, 87, 0.1);
-    border: 1px solid #EB5757;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 5.625rem;
-    height: 2.0625rem; 
-     
-    
-    
+.redbutton {
+  top: 5.625rem;
+  text-align: center;
+  background: rgba(235, 87, 87, 0.1);
+  border: 1px solid #eb5757;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 5.625rem;
+  height: 2.0625rem;
 }
 
-.redbutton:first-child
-{
-    
-    float: left;
-    position: absolute;
-    left: 1rem;
+.redbutton:first-child {
+  float: left;
+  position: absolute;
+  left: 1rem;
 }
 
-.redbutton:nth-child(2)
-{
-    
-    float: left;
-    position: absolute;
-    left: 7.4375rem;
+.redbutton:nth-child(2) {
+  float: left;
+  position: absolute;
+  left: 7.4375rem;
 }
 
-.redbutton:last-child
-{
-    
-    float: right;
-    position: absolute;
-   
-    right: 1rem;
+.redbutton:last-child {
+  float: right;
+  position: absolute;
 
+  right: 1rem;
 }
-.font
-{
+.font {
   font-family: Inter;
   font-style: normal;
   font-weight: 600;
