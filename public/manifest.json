@@ -13,7 +13,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/955-scouting-pwa",
+  "start_url": "https://frc-team-955.github.io/955-scouting-pwa/",
+  "scope": "https://frc-team-955.github.io/955-scouting-pwa/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

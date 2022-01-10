@@ -6,12 +6,13 @@ import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/955-scouting-pwa/proto" element={<Prototype />} />
-        <Route path="/955-scouting-pwa/" element={<Dashboard />} />
-      </Routes>
-    </BrowserRouter>
+    <Dashboard />
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/955-scouting-pwa/proto" element={<Prototype />} />
+    //     <Route path="/955-scouting-pwa/" element={<Dashboard />} />
+    //   </Routes>
+    // </BrowserRouter>
   );
 }
 
