@@ -4,6 +4,7 @@ import "../styles/dashboard.css";
 
 import Nav from "../components/nav";
 import Match from "../components/match";
+import CsvViewer from "../components/csv-viewer";
 
 import { getEventsFromWeek, getMatchesFromEventKey } from "../api/tba";
 import { ICurrentEvent, IMatch } from "../models";
@@ -13,6 +14,7 @@ export default function Dashboard() {
   const [matchSchedule, setMatchSchedule] = useState<Array<IMatch>>([]);
   const [week, setWeek] = useState(1);
   const [eventKey, setEventKey] = useState("");
+  const [showCsvViewer, setShowCsvViewer] = useState(false);
 
   const handleChange = (e) => {
     setWeek(e.target.value);
@@ -66,6 +68,17 @@ export default function Dashboard() {
           )}
         </select>
       </div>
+
+      {showCsvViewer ? (
+        <CsvViewer exit={() => setShowCsvViewer(false)} />
+      ) : (
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowCsvViewer(true)}
+        >
+          Download CSV
+        </button>
+      )}
 
       <div className="matches">
         <p>Matches</p>

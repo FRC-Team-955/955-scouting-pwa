@@ -1,0 +1,9 @@
+#csv-viewer-div {
+  margin: 5rem auto;
+  white-space: nowrap;
+  width: 75% !important;
+}
+
+#exit-btn {
+  margin-left: 4rem;
+}
