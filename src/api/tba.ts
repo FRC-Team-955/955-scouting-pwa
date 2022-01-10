@@ -35,6 +35,29 @@ export async function getEventsFromWeek(week: number) {
   });
 }
 
+export async function getEventFromKey(key: string) {
+  // gets event and match schedule from given key
+  const frcEvent = await fetch(`${api}/event/${key}`, header)
+    .then((res) => res.json())
+    .then(
+      (result) => {
+        return result;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  const matchList = await getMatchesFromEventKey(key); //adds in match schedule
+  return {
+    id: frcEvent.key,
+    name: frcEvent.name,
+    location: frcEvent.city,
+    start_date: frcEvent.start_date,
+    week: frcEvent.week,
+    matches: matchList,
+  };
+}
+
 //returns a list of matches sorted by time
 export async function getMatchesFromEventKey(key: string) {
   const matchArray = await fetch(`${api}/event/${key}/matches`, header)

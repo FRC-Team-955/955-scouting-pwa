@@ -49,7 +49,7 @@ export interface IMatchTBA {
   videos?: Array<any>;
 }
 
-export interface ICurrentEvent {
+export interface IEvent {
   id: string;
   name: string;
   location?: string;

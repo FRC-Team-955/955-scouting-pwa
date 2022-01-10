@@ -6,12 +6,18 @@ import Nav from "../components/nav";
 import Match from "../components/match";
 import CsvViewer from "../components/csv-viewer";
 
-import { getEventsFromWeek, getMatchesFromEventKey } from "../api/tba";
-import { ICurrentEvent, IMatch } from "../models";
+import {
+  getEventFromKey,
+  getEventsFromWeek,
+  getMatchesFromEventKey,
+} from "../api/tba";
+
+import { storeMatchSchedule, loadMatchSchedules } from "../api/local-storage";
+import { IEvent, IMatchSchedule } from "../models";
 
 export default function Dashboard() {
-  const [eventList, setEventList] = useState<Array<ICurrentEvent> | null>();
-  const [matchSchedule, setMatchSchedule] = useState<Array<IMatch>>([]);
+  const [eventList, setEventList] = useState<Array<IEvent> | null>();
+  const [matchSchedule, setMatchSchedule] = useState<IMatchSchedule>([]);
   const [week, setWeek] = useState(1);
   const [eventKey, setEventKey] = useState("");
   const [showCsvViewer, setShowCsvViewer] = useState(false);
@@ -21,16 +27,36 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    getEventsFromWeek(week).then((s) => {
-      setEventList(s);
-      setEventKey(s[0].id);
-    });
+    if (navigator.onLine) {
+      // runs while online
+      getEventsFromWeek(week).then((s) => {
+        setEventList(s);
+        setEventKey(s[0].id);
+      });
+    } else {
+      // runs while offline
+      loadMatchSchedules(week).then((s) => {
+        setEventList(s);
+        setEventKey(s[0].id);
+      });
+    }
   }, [week]);
 
   useEffect(() => {
-    getMatchesFromEventKey(eventKey).then((s) => {
-      setMatchSchedule(s);
-    });
+    // runs while online
+    if (navigator.onLine) {
+      getMatchesFromEventKey(eventKey).then((s) => {
+        setMatchSchedule(s);
+        getEventFromKey(eventKey).then((res) => storeMatchSchedule(week, res)); // stores selected match
+      });
+    } else {
+      // runs while offline
+      const s: any = eventList
+        ? eventList.find((x) => x.id === eventKey)?.matches
+        : [];
+      if (s.length > 0) setMatchSchedule(s);
+    }
+    // eslint-disable-next-line
   }, [eventKey]);
 
   const matchChange = (m) => {
