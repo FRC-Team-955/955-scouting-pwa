@@ -65,8 +65,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="weeklist">
-        <select value={week} id="week-event" onChange={handleChange}>
+      <div id="weeklist2">
+        <select value={week} id="week-select" onChange={handleChange}>
           <option value={1}>Week 1</option>
           <option value={2}>Week 2</option>
           <option value={3}>Week 3</option>
@@ -76,11 +76,11 @@ export default function Dashboard() {
         </select>
       </div>
 
-      <div className="eventlist">
+      <div className="eventlist2">
         <select
           value={eventKey}
           name="Event"
-          id="event-name"
+          id="event-select"
           onChange={matchChange}
         >
           {eventList ? (
