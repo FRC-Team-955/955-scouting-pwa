@@ -1,26 +1,9 @@
-.weeklist {
-  width: 5.25rem;
-  height: 1.8125rem;
-  /* left: 1rem;
-  top: 1.5rem; */
-
-  font-family: Inter;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 29.05px;
-  /* identical to box height */
-  border: 0px solid rgb(255, 255, 255);
-  border-radius: 4px;
-
-  color: #000000;
-}
-
 #week-select {
   appearance: none;
   outline: none;
   border: none;
   background: url("./images/caret-down.png") no-repeat 100% 50%;
+  display: block;
 
   font-size: 1.5rem;
   font-weight: 700;
@@ -50,21 +33,6 @@
   padding-right: 2rem;
 }
 
-.eventlist {
-  width: 14.8125rem;
-  height: 0.9375rem;
-  /* left: 1rem; */
-  /* top: 4.3125rem; */
-
-  font-family: Inter;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  color: #000000;
-}
-
 hr {
   margin: 1rem auto;
 }
@@ -80,6 +48,8 @@ hr {
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
+
+  margin-left: 1rem;
 
   color: #000000;
 }

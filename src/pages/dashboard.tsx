@@ -65,35 +65,31 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div id="weeklist2">
-        <select value={week} id="week-select" onChange={handleChange}>
-          <option value={1}>Week 1</option>
-          <option value={2}>Week 2</option>
-          <option value={3}>Week 3</option>
-          <option value={4}>Week 4</option>
-          <option value={5}>Week 5</option>
-          <option value={6}>Week 6</option>
-        </select>
-      </div>
+      <select value={week} id="week-select" onChange={handleChange}>
+        <option value={1}>Week 1</option>
+        <option value={2}>Week 2</option>
+        <option value={3}>Week 3</option>
+        <option value={4}>Week 4</option>
+        <option value={5}>Week 5</option>
+        <option value={6}>Week 6</option>
+      </select>
 
-      <div className="eventlist2">
-        <select
-          value={eventKey}
-          name="Event"
-          id="event-select"
-          onChange={matchChange}
-        >
-          {eventList ? (
-            eventList.map((e, i) => (
-              <option value={e.id} key={i}>
-                {e.name}
-              </option>
-            ))
-          ) : (
-            <></>
-          )}
-        </select>
-      </div>
+      <select
+        value={eventKey}
+        name="Event"
+        id="event-select"
+        onChange={matchChange}
+      >
+        {eventList ? (
+          eventList.map((e, i) => (
+            <option value={e.id} key={i}>
+              {e.name}
+            </option>
+          ))
+        ) : (
+          <></>
+        )}
+      </select>
 
       <hr />
 
