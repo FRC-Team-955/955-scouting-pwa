@@ -117,7 +117,7 @@ export default function Dashboard() {
           <></>
         )}
       </div>
-      <Nav />
+      <Nav selectedPage={1} />
     </div>
   );
 }
