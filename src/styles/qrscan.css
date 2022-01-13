@@ -1,0 +1,38 @@
+#qr-div {
+  text-align: center;
+}
+
+#qr-title {
+  color: black;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.188rem;
+
+  width: 16rem;
+  margin: 7.563rem auto;
+  margin-bottom: 7.063rem;
+}
+
+#qr-nocamera {
+  width: 12.5rem;
+  height: 12.5rem;
+  background: #e0e0e0;
+  border-radius: 1rem;
+  margin: 0 auto;
+  cursor: pointer;
+
+  color: black;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 12.5rem;
+}
+
+#qr-reader {
+  width: 12.5rem;
+  height: 12.5rem;
+  background: #e0e0e0;
+  border-radius: 16px;
+}
