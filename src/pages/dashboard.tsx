@@ -5,6 +5,8 @@ import "../styles/dashboard.css";
 import Nav from "../components/nav";
 import Match from "../components/match";
 import CsvViewer from "../components/csv-viewer";
+import QRgen from "../components/qrgen";
+
 
 import {
   getEventFromKey,
@@ -21,6 +23,9 @@ export default function Dashboard() {
   const [week, setWeek] = useState(1);
   const [eventKey, setEventKey] = useState("");
   const [showCsvViewer, setShowCsvViewer] = useState(false);
+  const [showQRgen, setShowQRgen] = useState(false);
+  const [QRdata, setQRdata] = useState({});
+
 
   const handleChange = (e) => {
     setWeek(e.target.value);
@@ -63,8 +68,16 @@ export default function Dashboard() {
     setEventKey(m.target.value);
   };
 
+
+
   return (
     <div>
+      {showQRgen ? (
+        <QRgen exit={() => setShowQRgen(false)} data={QRdata}/>
+      ) : (
+        <></>
+      )}
+
       <select value={week} id="week-select" onChange={handleChange}>
         <option value={1}>Week 1</option>
         <option value={2}>Week 2</option>
@@ -111,7 +124,7 @@ export default function Dashboard() {
       <div>
         {matchSchedule.length > 0 ? (
           matchSchedule.map((data, index) => (
-            <Match key={index} matchData={data} />
+            <Match key={index} matchData={data} openQRgen={(QRinfo)=>{setShowQRgen(true); setQRdata(QRinfo)}}/> 
           ))
         ) : (
           <></>
