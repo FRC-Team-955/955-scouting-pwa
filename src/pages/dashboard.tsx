@@ -6,6 +6,7 @@ import Nav from "../components/nav";
 import Match from "../components/match";
 import CsvViewer from "../components/csv-viewer";
 import QRgen from "../components/qrgen";
+import DataEntry from "../components/data-entry";
 
 import {
   getEventFromKey,
@@ -24,11 +25,13 @@ export default function Dashboard() {
   const [showCsvViewer, setShowCsvViewer] = useState(false);
   const [showQRgen, setShowQRgen] = useState(false);
   const [QRdata, setQRdata] = useState({});
+  const [showDataEntry, setShowDataEntry] = useState(true)
+  const [matchNumberdadadad, setMatchNumberdadadad] = useState(0)
+  const [teamNumberdadadad, setTeamNumberdadadad] = useState(0)
 
   const handleChange = (e) => {
     setWeek(e.target.value);
   };
-
   useEffect(() => {
     if (navigator.onLine) {
       // runs while online
@@ -68,6 +71,12 @@ export default function Dashboard() {
 
   return (
     <div>
+      {showDataEntry ? (
+        <DataEntry exit={() => setShowDataEntry(false)} matchNumber={matchNumberdadadad} teamNumber={teamNumberdadadad} />
+      ) : (
+        <></>
+      )}
+
       {showQRgen ? (
         <QRgen exit={() => setShowQRgen(false)} data={QRdata} />
       ) : (
@@ -126,6 +135,11 @@ export default function Dashboard() {
               openQRgen={(QRinfo) => {
                 setShowQRgen(true);
                 setQRdata(QRinfo);
+              }}
+              openDataEntry={(matchNumber, teamNumber) =>{
+                setMatchNumberdadadad(matchNumber);
+                setTeamNumberdadadad(teamNumber);
+                setShowDataEntry(true);
               }}
             />
           ))

@@ -4,7 +4,7 @@ import ellipsisImg from "../styles/images/ellipsis-v.png";
 
 import { Card } from "react-bootstrap";
 
-export default function Match({ matchData, openQRgen }) {
+export default function Match({ matchData, openQRgen , openDataEntry}) {
   return (
     <Card
       style={{ width: "20.5rem", height: "8.6875rem", margin: "1rem auto" }}
@@ -15,7 +15,7 @@ export default function Match({ matchData, openQRgen }) {
         </div>
 
         <div>
-          <button className="bluebutton">
+          <button className="bluebutton" onClick={() =>openDataEntry(matchData.matchNumber ,matchData.alliances.blue.teams[0])}>
             <span>{matchData.alliances.blue.teams[0]}</span>
             <img
               className="ellipsis"
