@@ -6,22 +6,27 @@
   transform: translate(-50%, 50%);
   z-index: 100;
 }
+
 .data-card form {
   padding: 0 1rem;
 }
-.data-card label{
+
+.data-card label {
   margin-right: 0.5rem;
 }
-.data-card svg{
+
+.data-card svg {
   width: 1rem;
   float: right;
   cursor: pointer;
 }
+
 .data-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
 }
+
 .data-group input {
   margin-bottom: 0.5rem;
 }

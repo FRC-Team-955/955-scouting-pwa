@@ -15,7 +15,7 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
         </div>
 
         <div>
-          <button className="bluebutton" onClick={() =>openDataEntry(matchData.matchNumber ,matchData.alliances.blue.teams[0])}>
+          <button className="bluebutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.blue.teams[0])}>
             <span>{matchData.alliances.blue.teams[0]}</span>
             <img
               className="ellipsis"
@@ -23,10 +23,10 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.blue.teams[0])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.blue.teams[0])}}
             />
           </button>
-          <button className="bluebutton">
+          <button className="bluebutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.blue.teams[1])}>
             {matchData.alliances.blue.teams[1]}{" "}
             <img
               className="ellipsis"
@@ -34,10 +34,10 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.blue.teams[1])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.blue.teams[1])}}
             />
           </button>
-          <button className="bluebutton">
+          <button className="bluebutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.blue.teams[2])}>
             {matchData.alliances.blue.teams[2]}{" "}
             <img
               className="ellipsis"
@@ -45,12 +45,12 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.blue.teams[2])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.blue.teams[2])}}
             />
           </button>
         </div>
         <div>
-          <button className="redbutton">
+          <button className="redbutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.red.teams[0])}>
             {matchData.alliances.red.teams[0]}{" "}
             <img
               className="ellipsis"
@@ -58,10 +58,10 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.red.teams[0])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.red.teams[0])}}
             />
           </button>
-          <button className="redbutton">
+          <button className="redbutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.red.teams[1])}>
             {matchData.alliances.red.teams[1]}{" "}
             <img
               className="ellipsis"
@@ -69,10 +69,10 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.red.teams[1])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.red.teams[1])}}
             />
           </button>
-          <button className="redbutton">
+          <button className="redbutton" onClick={() =>openDataEntry(matchData.matchNumber, matchData.alliances.red.teams[2])}>
             {matchData.alliances.red.teams[2]}{" "}
             <img
               className="ellipsis"
@@ -80,7 +80,7 @@ export default function Match({ matchData, openQRgen , openDataEntry}) {
               height="30px"
               alt=""
               src={ellipsisImg}
-              onClick={() => openQRgen(matchData.alliances.red.teams[2])}
+              onClick={(e) => {e.stopPropagation(); openQRgen(matchData.alliances.red.teams[2])}}
             />
           </button>
         </div>
