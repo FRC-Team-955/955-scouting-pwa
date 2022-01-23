@@ -16,14 +16,14 @@ export default function QRgen({ exit, data }) {
   }
 
   useEffect(() => {
-    generateQR(`${data}`);
+    if(data?.teamNumber) generateQR(`${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.climb}`);
   }, [data]);
 
   return (
     <div className="qrcard">
       <Card style={{ width: "16rem", height: "20rem" }}>
         <Card.Body>
-          {data}
+          {data?.teamNumber?data.teamNumber:<p>No Data</p>}
           <button className="btn btn-primary" id="exit-btn" onClick={exit}>
             Exit
           </button>

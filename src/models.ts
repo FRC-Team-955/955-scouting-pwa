@@ -78,11 +78,16 @@ export interface IMatch {
 export interface IMatchAlliance {
   score?: number;
   teams: Array<number>;
-  data: Array<string>; // array of ITeamData ids
+  data: Array<ITeamData>; 
 }
 
 export interface ITeamData {
   id: string;
   teamNumber: number;
-  points: number;
+  taxi: boolean;
+  autoLow: number;
+  autoHigh: number;
+  telopLow: number;
+  telopHigh: number;
+  climb: number;
 }
