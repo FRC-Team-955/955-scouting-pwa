@@ -1,0 +1,10 @@
+hr {
+  margin: 1rem auto;
+}
+
+button {
+  border: 0 none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

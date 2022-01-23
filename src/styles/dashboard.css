@@ -33,15 +33,9 @@
   padding-right: 2rem;
 }
 
-hr {
-  margin: 1rem auto;
-}
-
 .matches {
   width: 4.1875rem;
   height: 1.1875rem;
-  /* left: 1rem;
-  top: 7.25rem; */
 
   font-family: Inter;
   font-style: normal;

@@ -29,7 +29,7 @@ export default function CsvViewer({ exit, eventId }) {
         >
           Download
         </button>
-        <button className="btn btn-primary" id="exit-btn" onClick={exit}>
+        <button className="btn btn-primary" id="csv-viewer-exit-btn" onClick={exit}>
           Exit
         </button>
         <pre>{csvText}</pre>
