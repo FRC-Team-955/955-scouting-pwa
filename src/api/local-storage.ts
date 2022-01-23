@@ -10,7 +10,6 @@ export async function generateCSV(eventId) {
   );
   currentData = currentData.filter((x:ITeamData) => x.id.substring(0,x.id.indexOf('_')) === eventId)
   let csvData = currentData.map((data: ITeamData)=>`${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.climb}`)
-  console.log(csvData)
   return csvData.join('\n')
 }
 

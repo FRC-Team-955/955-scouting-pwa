@@ -48,7 +48,7 @@ export default function Match({ matchData, openQRgen}) {
         </div>
 
         <div>
-          <button className="bluebutton" onClick={() => openDataEntry('b', 0)}>
+          <button className="bluebutton" onClick={() => openDataEntry('b', 0)} style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.blue.teams[0])?'rgba(47, 128, 237, 0.1)':'none'}}>
             <span>{matchData.alliances.blue.teams[0]}</span>
             <img
               className="ellipsis"
@@ -59,7 +59,7 @@ export default function Match({ matchData, openQRgen}) {
               onClick={(e) => {e.stopPropagation(); openQRgen(teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.blue.teams[0]))}}
             />
           </button>
-          <button className="bluebutton" onClick={() => openDataEntry('b', 1)}>
+          <button className="bluebutton" onClick={() => openDataEntry('b', 1)}  style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.blue.teams[1])?'rgba(47, 128, 237, 0.1)':'none'}}>
             {matchData.alliances.blue.teams[1]}{" "}
             <img
               className="ellipsis"
@@ -70,7 +70,7 @@ export default function Match({ matchData, openQRgen}) {
               onClick={(e) => {e.stopPropagation(); openQRgen(teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.blue.teams[1]))}}
             />
           </button>
-          <button className="bluebutton" onClick={() => openDataEntry('b', 2)}>
+          <button className="bluebutton" onClick={() => openDataEntry('b', 2)}  style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.blue.teams[2])?'rgba(47, 128, 237, 0.1)':'none'}}>
             {matchData.alliances.blue.teams[2]}{" "}
             <img
               className="ellipsis"
@@ -83,7 +83,7 @@ export default function Match({ matchData, openQRgen}) {
           </button>
         </div>
         <div>
-          <button className="redbutton" onClick={() => openDataEntry('r', 0)}>
+          <button className="redbutton" onClick={() => openDataEntry('r', 0)}  style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.red.teams[0])?'rgba(235, 87, 87, 0.1)':'none'}}>
             {matchData.alliances.red.teams[0]}{" "}
             <img
               className="ellipsis"
@@ -94,7 +94,7 @@ export default function Match({ matchData, openQRgen}) {
               onClick={(e) => {e.stopPropagation(); openQRgen(teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.red.teams[0]))}}
             />
           </button>
-          <button className="redbutton" onClick={() => openDataEntry('r', 1)}>
+          <button className="redbutton" onClick={() => openDataEntry('r', 1)} style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.red.teams[1])?'rgba(235, 87, 87, 0.1)':'none'}}>
             {matchData.alliances.red.teams[1]}{" "}
             <img
               className="ellipsis"
@@ -105,7 +105,7 @@ export default function Match({ matchData, openQRgen}) {
               onClick={(e) => {e.stopPropagation(); openQRgen(teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.red.teams[1]))}}
             />
           </button>
-          <button className="redbutton" onClick={() => openDataEntry('r', 2)}>
+          <button className="redbutton" onClick={() => openDataEntry('r', 2)} style={{'background': teamData.find((x: ITeamData) => x.teamNumber === matchData.alliances.red.teams[2])?'rgba(235, 87, 87, 0.1)':'none'}}>
             {matchData.alliances.red.teams[2]}{" "}
             <img
               className="ellipsis"

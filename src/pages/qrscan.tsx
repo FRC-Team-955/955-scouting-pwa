@@ -11,7 +11,6 @@ export function QRScan() {
   function handleScan(data){
     if(data){
       const dataArr = data.text.split(',')
-      console.log(dataArr)
       setDisplayScanner(false)
       if(dataArr.length >= 8){
         storeMatchData({

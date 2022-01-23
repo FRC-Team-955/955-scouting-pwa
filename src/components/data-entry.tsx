@@ -18,18 +18,20 @@ export default function DataEntry({ exit, matchNumber, matchId, data }:dataEntry
   const [telopHigh, setTelopHigh] = useState(data?.telopHigh || 0);
   const [climb, setClimb] = useState(data?.climb || 0);
 
-  function saveData(e){
+  function saveData(e, forceSave=true){
     e?.preventDefault()
-    storeMatchData({
-      id: `${matchId}-${data.teamNumber.toString()}`,
-      teamNumber: data.teamNumber,
-      taxi,
-      autoLow,
-      autoHigh,
-      telopLow,
-      telopHigh,
-      climb
-    })
+    if(forceSave || (taxi !== false || autoLow !== 0 || autoHigh !== 0 || telopLow !== 0 || telopHigh !== 0 || climb !== 0)){
+      storeMatchData({
+        id: `${matchId}-${data.teamNumber.toString()}`,
+        teamNumber: data.teamNumber,
+        taxi,
+        autoLow,
+        autoHigh,
+        telopLow,
+        telopHigh,
+        climb
+      })
+    }
   }
 
   return (
@@ -37,7 +39,7 @@ export default function DataEntry({ exit, matchNumber, matchId, data }:dataEntry
       <div className="card-body">
         <h3>
           Match {matchNumber}: {data.teamNumber}
-          <svg onClick={()=>{saveData(null); exit()}} viewBox="0 0 320 512">
+          <svg onClick={()=>{saveData(null, false); exit()}} viewBox="0 0 320 512">
             <path
               fill="currentColor"
               d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"

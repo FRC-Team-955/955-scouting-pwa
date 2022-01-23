@@ -14,7 +14,8 @@ button {
   top: 2.5625rem;
   text-align: left;
   padding: 0 0.5rem;
-  background: rgba(47, 128, 237, 0.1);
+  /* background: rgba(47, 128, 237, 0.1); */
+  background: none;
   border: 1px solid #2f80ed;
   box-sizing: border-box;
   border-radius: 4px;
@@ -53,7 +54,8 @@ button {
   top: 5.625rem;
   text-align: left;
   padding: 0 0.5rem;
-  background: rgba(235, 87, 87, 0.1);
+  /* background: rgba(235, 87, 87, 0.1); */
+  background: none;
   border: 1px solid #eb5757;
   box-sizing: border-box;
   border-radius: 4px;
