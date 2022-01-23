@@ -3,10 +3,10 @@ import { generateCSV } from "../api/local-storage";
 
 import "../styles/csv-viewer.css";
 
-export default function CsvViewer({ exit }) {
+export default function CsvViewer({ exit, eventId }) {
   const [csvText, setCsvText] = useState("");
   useEffect(() => {
-    generateCSV().then((data) => setCsvText(data)); // gets data from local storage
+    generateCSV(eventId).then((data) => setCsvText(data)); // gets data from local storage
   }, []);
 
   function downloadFile(): any {

@@ -1,8 +1,17 @@
 import { get, set } from "idb-keyval";
 import { IEvent, ITeamData } from "../models";
 
-export async function generateCSV() {
-  return "1,2,3,4,5,6,7\n1,2,3,4,5,6,7";
+export async function generateCSV(eventId) {
+  let currentData = [];
+
+  // reads currently stored data
+  await get('data').then((val) =>
+    val ? (currentData = val) : currentData
+  );
+  currentData = currentData.filter((x:ITeamData) => x.id.substring(0,x.id.indexOf('_')) === eventId)
+  let csvData = currentData.map((data: ITeamData)=>`${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.climb}`)
+  console.log(csvData)
+  return csvData.join('\n')
 }
 
 export async function storeMatchData( data: ITeamData) {

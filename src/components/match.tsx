@@ -15,7 +15,7 @@ export default function Match({ matchData, openQRgen}) {
 
   useEffect(() => {
     getMatchDataFromId(matchData.id).then(res=>setTeamData(res))
-  }, [matchData.id])
+  })
 
   function openDataEntry(color, index){
     if(color === 'b'){

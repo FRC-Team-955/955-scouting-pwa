@@ -104,7 +104,7 @@ export default function Dashboard() {
       <hr />
 
       {showCsvViewer ? (
-        <CsvViewer exit={() => setShowCsvViewer(false)} />
+        <CsvViewer exit={() => setShowCsvViewer(false)} eventId={eventKey}/>
       ) : (
         <button
           className="btn btn-primary"
