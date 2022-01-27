@@ -9,10 +9,9 @@
   font-weight: bold;
   font-size: 1rem;
   line-height: 1.188rem;
-
   width: 16rem;
-  margin: 7.563rem auto;
-  margin-bottom: 7.063rem;
+  margin: 1rem auto;
+  margin-bottom: 2rem;
 }
 
 #qr-nocamera {
@@ -31,8 +30,10 @@
 }
 
 #qr-reader {
-  width: 12.5rem;
-  height: 12.5rem;
+  width: 25rem;
+  max-width: 80%;
+  height: 25rem;
   background: #e0e0e0;
   border-radius: 16px;
+  margin: 0 auto;
 }
