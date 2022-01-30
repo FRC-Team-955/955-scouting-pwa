@@ -5,6 +5,7 @@
   left: 50%;
   transform: translate(-50%, 50%);
   z-index: 100;
+  font-family: Inter;
 }
 
 .data-card form {
@@ -27,6 +28,21 @@
   margin-bottom: 0.5rem;
 }
 
-.data-group input {
+.data-group div {
   margin-bottom: 0.5rem;
+}
+
+.data-form-inputs {
+  display: inline;
+}
+
+.data-form-inputs .btn {
+  font-family: Inter;
+  font-size: 1rem;
+}
+
+.data-form-inputs span {
+  padding: 0 0.75rem;
+  font-family: Inter;
+  font-size: 1rem;
 }
