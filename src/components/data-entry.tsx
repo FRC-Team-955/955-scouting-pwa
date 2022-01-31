@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { sendMatchDataFirebase } from "../api/firebase-api";
 import { storeMatchData } from "../api/local-storage";
 import { IEvent } from "../models";
 import "../styles/data-entry.css";
@@ -44,6 +45,18 @@ export default function DataEntry({
         telopHigh,
         climb,
       });
+      if (!forceSave && navigator.onLine) {
+        sendMatchDataFirebase({
+          id: `${matchId}-${data.teamNumber.toString()}`,
+          teamNumber: data.teamNumber,
+          taxi,
+          autoLow,
+          autoHigh,
+          telopLow,
+          telopHigh,
+          climb,
+        });
+      }
     }
   }
 
