@@ -5,6 +5,7 @@ import "../styles/csv-viewer.css";
 
 export default function CsvViewer({ exit, eventId }) {
   const [csvText, setCsvText] = useState("");
+  const [show, setShow] = useState(false);
   useEffect(() => {
     generateCSV(eventId).then((data) => setCsvText(data)); // gets data from local storage
   }, []);
@@ -22,17 +23,27 @@ export default function CsvViewer({ exit, eventId }) {
   return (
     <div className="card" id="csv-viewer-div" style={{ width: "18rem" }}>
       <div className="card-body">
-        <button
-          onClick={downloadFile}
-          className="btn btn-primary"
-          id="csvDownload"
-        >
-          Download
-        </button>
-        <button className="btn btn-primary" id="csv-viewer-exit-btn" onClick={exit}>
-          Exit
-        </button>
-        <pre>{csvText}</pre>
+        <div>
+          <button
+            onClick={downloadFile}
+            className="btn btn-primary"
+            id="csvDownload"
+          >
+            Download
+          </button>
+          <button className="btn btn-primary" onClick={() => setShow(!show)}>
+            Show/Hide text
+          </button>
+          <button
+            className="btn btn-primary"
+            id="csv-viewer-exit-btn"
+            onClick={exit}
+          >
+            Exit
+          </button>
+        </div>
+
+        {show ? <pre>{csvText}</pre> : <></>}
       </div>
     </div>
   );
