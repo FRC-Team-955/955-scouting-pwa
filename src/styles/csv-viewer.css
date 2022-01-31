@@ -1,4 +1,10 @@
 #csv-viewer-div {
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 100;
+  font-family: Inter;
   margin: 1rem auto;
   white-space: nowrap;
   width: 75% !important;
