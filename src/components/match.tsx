@@ -56,7 +56,18 @@ export default function Match({ matchData, openQRgen }) {
           <></>
         )}
         <div id="match-number">
-          <p>Match {matchData.matchNumber}</p>
+          <p>
+            {matchData.matchType === "qm"
+              ? "Qualifier "
+              : matchData.matchType === "f"
+              ? "Final "
+              : matchData.matchType === "qf"
+              ? "Quarterfinal " + matchData.id[matchData.id.length - 3] + "-"
+              : matchData.matchType === "sf"
+              ? "Semifinal " + matchData.id[matchData.id.length - 3] + "-"
+              : ""}
+            {matchData.matchNumber}
+          </p>
         </div>
 
         <div>
