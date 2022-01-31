@@ -25,6 +25,7 @@ export default function Dashboard() {
   const [showCsvViewer, setShowCsvViewer] = useState(false);
   const [showQRgen, setShowQRgen] = useState(false);
   const [QRdata, setQRdata] = useState({});
+  const [lockDropdown, setLockDropdown] = useState(false);
 
   const handleChange = (e) => {
     setWeek(e.target.value);
@@ -79,7 +80,12 @@ export default function Dashboard() {
           marginTop: "1.5rem",
         }}
       >
-        <select value={week} id="week-select" onChange={handleChange}>
+        <select
+          value={week}
+          id="week-select"
+          onChange={handleChange}
+          disabled={lockDropdown}
+        >
           <option value={1}>Week 1</option>
           <option value={2}>Week 2</option>
           <option value={3}>Week 3</option>
@@ -87,6 +93,46 @@ export default function Dashboard() {
           <option value={5}>Week 5</option>
           <option value={6}>Week 6</option>
         </select>
+
+        {lockDropdown ? (
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="lock"
+            className="svg-inline--fa fa-lock"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            height="1.599rem"
+            onClick={() => setLockDropdown(false)}
+            style={{ display: "inline", float: "right", marginLeft: "1rem" }}
+          >
+            <path
+              fill="currentColor"
+              d="M384 223.1L368 224V144c0-79.41-64.59-144-144-144S80 64.59 80 144V224L64 223.1c-35.35 0-64 28.65-64 64v160c0 35.34 28.65 64 64 64h320c35.35 0 64-28.66 64-64v-160C448 252.7 419.3 223.1 384 223.1zM144 144C144 99.88 179.9 64 224 64s80 35.88 80 80V224h-160V144z"
+            ></path>
+          </svg>
+        ) : (
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="lock-open"
+            className="svg-inline--fa fa-lock-open"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 576 512"
+            height="1.599rem"
+            onClick={() => setLockDropdown(true)}
+            style={{ display: "inline", float: "right", marginLeft: "1rem" }}
+          >
+            <path
+              fill="currentColor"
+              d="M446.4 .7031C360.5-7.664 288 59.85 288 144V224H64C28.65 224 0 252.7 0 288v160c0 35.34 28.65 64 64 64h320c35.35 0 64-28.66 64-64V288c0-35.35-28.65-64-64-64h-32V144c0-46.89 40.52-84.46 88.37-79.57C481.1 68.68 512 106.9 512 148.7V208C512 216.8 519.2 224 528 224h32C568.8 224 576 216.8 576 208V150.4C576 75.24 521.2 7.992 446.4 .7031z"
+            ></path>
+          </svg>
+        )}
 
         {showCsvViewer ? (
           <CsvViewer exit={() => setShowCsvViewer(false)} eventId={eventKey} />
@@ -116,6 +162,7 @@ export default function Dashboard() {
         name="Event"
         id="event-select"
         onChange={matchChange}
+        disabled={lockDropdown}
       >
         {eventList ? (
           eventList.map((e, i) => (
