@@ -43,6 +43,14 @@ export async function getMatchDataFromId(id: string) {
   return currentData;
 }
 
+//return all scouting data ever
+export async function getMatchData() {
+  let currentData = [];
+  // reads currently stored data
+  await get("data").then((val) => (val ? (currentData = val) : currentData));
+  return currentData;
+}
+
 // stores an event (matchSchedule) when given a week and the actual schedule
 export async function storeMatchSchedule(week: number, data: IEvent) {
   let currentMatchList = [];

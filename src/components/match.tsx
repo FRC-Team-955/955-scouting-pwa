@@ -48,7 +48,7 @@ export default function Match({ matchData, openQRgen }) {
           <DataEntry
             exit={() => {
               setShowDataEntry(false);
-              getMatchDataFromId(matchData.id).then((res) => setTeamData(res)); // refreshed teamData by pulling from local storage
+              getMatchDataFromId(matchData.id).then((res) => setTeamData(res)); // refreshes teamData by pulling from local storage
             }}
             matchNumber={matchData.matchNumber}
             matchId={matchData.id}
