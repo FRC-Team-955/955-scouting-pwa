@@ -1,6 +1,7 @@
 import { get, set } from "idb-keyval";
 import { IEvent, ITeamData } from "../models";
 
+// gets all scouting data for a current event and puts that into csv form
 export async function generateCSV(eventId) {
   let currentData = [];
 
@@ -16,6 +17,7 @@ export async function generateCSV(eventId) {
   return csvData.join("\n");
 }
 
+// stores scouter data for one match
 export async function storeMatchData(data: ITeamData) {
   let currentData = [];
 
@@ -29,6 +31,7 @@ export async function storeMatchData(data: ITeamData) {
     .catch((err) => console.log("It failed!", err));
 }
 
+//given a match id, returns all scouting data
 export async function getMatchDataFromId(id: string) {
   let currentData = [];
 
@@ -40,6 +43,7 @@ export async function getMatchDataFromId(id: string) {
   return currentData;
 }
 
+// stores an event (matchSchedule) when given a week and the actual schedule
 export async function storeMatchSchedule(week: number, data: IEvent) {
   let currentMatchList = [];
 
@@ -56,6 +60,7 @@ export async function storeMatchSchedule(week: number, data: IEvent) {
     .catch((err) => console.log("It failed!", err));
 }
 
+// loads all events for a given week
 export async function loadMatchSchedules(week: number) {
   return await get(`matchesWeek${week}`).then((val) => val);
 }
