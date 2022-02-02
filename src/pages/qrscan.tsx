@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/qrscan.css";
 
 import Nav from "../components/nav";
@@ -17,11 +17,10 @@ export function QRScan() {
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   }, []);
 
-  function onScanSuccess(decodedText, decodedResult) {
-    const dataArr = decodedText.split(",");
-    console.log(dataArr);
+  function onScanSuccess(decodedText) {
+    // function runs after sucesfull scan of qr code
+    const dataArr = decodedText.split(","); // qr gives a comma seperated string that is split into an array
     if (dataArr.length >= 8) {
-      console.log("hi");
       storeMatchData({
         id: dataArr[0],
         teamNumber: parseInt(dataArr[1]),
@@ -36,7 +35,8 @@ export function QRScan() {
   }
 
   function onScanFailure(error) {
-    // lets just ingnore these :P
+    // function runs after you FAIL
+    // let's just ingnore these :P
   }
 
   return (
@@ -44,13 +44,6 @@ export function QRScan() {
       <h2 id="qr-title">
         Scan a QR Code to import match data from another device
       </h2>
-      {/* {displayScanner ? (
-        <div id="reader" style={{ width: "600px" }}></div>
-      ) : (
-        <div id="qr-nocamera" onClick={() => setDisplayScanner(true)}>
-          Click to start camera
-        </div>
-      )} */}
       <div id="qr-reader"></div>
       <Nav selectedPage={0} />
     </div>

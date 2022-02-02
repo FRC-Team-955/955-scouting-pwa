@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { sendMatchDataFirebase } from "../api/firebase-api";
 import { storeMatchData } from "../api/local-storage";
-import { IEvent } from "../models";
 import "../styles/data-entry.css";
 
 interface dataEntryProps {
@@ -17,7 +16,7 @@ export default function DataEntry({
   matchId,
   data,
 }: dataEntryProps) {
-  const [taxi, setTaxi] = useState(data?.taxi || false);
+  const [taxi, setTaxi] = useState(data?.taxi || false); // the `x || x` syntax means set the default state to previously stored data or 0
   const [autoLow, setAutoLow] = useState(data?.autoLow || 0);
   const [autoHigh, setAutoHigh] = useState(data?.autoHigh || 0);
   const [telopLow, setTelopLow] = useState(data?.telopLow || 0);
@@ -26,6 +25,7 @@ export default function DataEntry({
 
   function saveData(e, forceSave = true) {
     e?.preventDefault();
+    // if save data was clicked or data was entered, save the data
     if (
       forceSave ||
       taxi !== false ||
@@ -35,6 +35,7 @@ export default function DataEntry({
       telopHigh !== 0 ||
       climb !== 0
     ) {
+      // puts match data into loacl storage
       storeMatchData({
         id: `${matchId}-${data.teamNumber.toString()}`,
         teamNumber: data.teamNumber,
@@ -45,6 +46,7 @@ export default function DataEntry({
         telopHigh,
         climb,
       });
+      // if x was pressed and user is online send data to firebase
       if (!forceSave && navigator.onLine) {
         sendMatchDataFirebase({
           id: `${matchId}-${data.teamNumber.toString()}`,

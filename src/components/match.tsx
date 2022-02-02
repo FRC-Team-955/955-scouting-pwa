@@ -9,18 +9,19 @@ import { ITeamData } from "../models";
 import DataEntry from "./data-entry";
 
 export default function Match({ matchData, openQRgen }) {
-  const [teamData, setTeamData] = useState([]);
-  const [showDataEntry, setShowDataEntry] = useState(false);
-  const [dataEntryData, setDataEntryData] = useState<any>(null);
+  const [teamData, setTeamData] = useState([]); // an array with scouting data for each team member in a match
+  const [showDataEntry, setShowDataEntry] = useState(false); // wheather to show the data entry form
+  const [dataEntryData, setDataEntryData] = useState<any>(null); // scouting data to send to the data entry form
 
   useEffect(() => {
-    getMatchDataFromId(matchData.id).then((res) => setTeamData(res));
+    getMatchDataFromId(matchData.id).then((res) => setTeamData(res)); // loads tean data from ls
   });
 
   function openDataEntry(color, index) {
     if (color === "b") {
       setDataEntryData(
         teamData.find(
+          // find index of teamData with the same team number as the team selected, or, if there is no data yet, send over the team number
           (x: ITeamData) =>
             x.teamNumber === matchData.alliances.blue.teams[index]
         ) || { teamNumber: matchData.alliances.blue.teams[index] }
@@ -29,6 +30,7 @@ export default function Match({ matchData, openQRgen }) {
     } else {
       setDataEntryData(
         teamData.find(
+          // find index of teamData with the same team number as the team selected, or, if there is no data yet, send over the team number
           (x: ITeamData) =>
             x.teamNumber === matchData.alliances.red.teams[index]
         ) || { teamNumber: matchData.alliances.red.teams[index] }
@@ -46,7 +48,7 @@ export default function Match({ matchData, openQRgen }) {
           <DataEntry
             exit={() => {
               setShowDataEntry(false);
-              getMatchDataFromId(matchData.id).then((res) => setTeamData(res));
+              getMatchDataFromId(matchData.id).then((res) => setTeamData(res)); // refreshed teamData by pulling from local storage
             }}
             matchNumber={matchData.matchNumber}
             matchId={matchData.id}
@@ -71,6 +73,8 @@ export default function Match({ matchData, openQRgen }) {
         </div>
 
         <div>
+          {/* I'm just commenting the first button, this structure repeats ( not DRY :( ) */}
+          {/* the style prop sets the background color depending on wheather data exists for that team */}
           <button
             className="bluebutton"
             onClick={() => openDataEntry("b", 0)}
@@ -91,8 +95,9 @@ export default function Match({ matchData, openQRgen }) {
               alt=""
               src={ellipsisImg}
               onClick={(e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // prevents you from clicking both buttons
                 openQRgen(
+                  // opens the display and sends over scouting data
                   teamData.find(
                     (x: ITeamData) =>
                       x.teamNumber === matchData.alliances.blue.teams[0]

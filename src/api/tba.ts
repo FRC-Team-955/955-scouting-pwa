@@ -16,7 +16,7 @@ export async function getEventsFromWeek(week: number) {
     .then((res) => res.json())
     .then(
       (result) => {
-        return result.filter((comp) => comp.week === week - 1); // week index startskey: string at 0
+        return result.filter((comp) => comp.week === week - 1); // TBA weeks start at 0, this line selects the events that are in the correct week
       },
       (error) => {
         console.log(error);
@@ -24,6 +24,7 @@ export async function getEventsFromWeek(week: number) {
     );
 
   return eventList.map((e) => {
+    // changes data shape from TBAEvent to Event
     return {
       id: e.key,
       name: e.name,
@@ -35,8 +36,8 @@ export async function getEventsFromWeek(week: number) {
   });
 }
 
+// gets event and match schedule from given key
 export async function getEventFromKey(key: string) {
-  // gets event and match schedule from given key
   const frcEvent = await fetch(`${api}/event/${key}`, header)
     .then((res) => res.json())
     .then(
@@ -73,6 +74,7 @@ export async function getMatchesFromEventKey(key: string) {
     );
 
   return matchArray.map((e) => {
+    // changes data shape
     return {
       id: e.key,
       matchType: e.comp_level,
