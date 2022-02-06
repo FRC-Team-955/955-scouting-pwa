@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 import { getMatchDataFirebase } from "../api/firebase-api";
+
 import CsvViewer from "./csv-viewer";
+import ScheduleGenerator from "./schedule-generator";
 
 export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
   const [showCsvViewer, setShowCsvViewer] = useState(false); // wheather the csv downloader is shown
+  const [showScheduleGen, setShowScheduleGen] = useState(false);
   return (
     <>
       {/* lock icon to prevent changes to selected event */}
@@ -92,6 +95,11 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
         ></path>
       </svg>
       {/* Calander icon to add a new schedule (not implimented) */}
+      {showScheduleGen ? (
+        <ScheduleGenerator exit={() => setShowScheduleGen(false)} />
+      ) : (
+        <></>
+      )}
       <svg
         aria-hidden="true"
         focusable="false"
@@ -102,7 +110,9 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 448 512"
         height="1.599rem"
-        onClick={() => {}}
+        onClick={() => {
+          setShowScheduleGen(true);
+        }}
         style={{ display: "inline", float: "right", marginRight: "1rem" }}
       >
         <path
