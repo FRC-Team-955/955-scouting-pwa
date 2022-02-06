@@ -16,7 +16,7 @@ import { storeMatchSchedule, loadMatchSchedules } from "../api/local-storage";
 
 import { IEvent, IMatchSchedule } from "../models";
 
-export default function Dashboard() {
+export default function Dashboard({setSchedule}) {
   const [eventList, setEventList] = useState<Array<IEvent> | null>(); // the list of events that is rendered in the dropdown (pulled from TBA or ls)
   const [matchSchedule, setMatchSchedule] = useState<IMatchSchedule>([]); // the list of matches (pulled from TBA or ls)
   const [week, setWeek] = useState(1); // the week currently seleceted in the dropdown
@@ -48,6 +48,7 @@ export default function Dashboard() {
       // runs while online
       getMatchesFromEventKey(eventKey).then((s) => {
         setMatchSchedule(s);
+        setSchedule(s);
         getEventFromKey(eventKey).then((res) => storeMatchSchedule(week, res)); // stores selected match in ls
       });
     } else {
@@ -55,7 +56,10 @@ export default function Dashboard() {
       const s: any = eventList
         ? eventList.find((x) => x.id === eventKey)?.matches // get the event from eventList that has our selected match key
         : [];
-      if (s.length > 0) setMatchSchedule(s); // if we have a match, set the match schedule
+      if (s.length > 0) {
+        setMatchSchedule(s);
+        setSchedule(s);
+      }; // if we have a match, set the match schedule
     }
     // eslint-disable-next-line
   }, [eventKey]);
