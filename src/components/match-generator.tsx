@@ -2,9 +2,18 @@ import { useState, useEffect } from "react";
 import "../styles/schedule-generator.css";
 
 export default function MatchGenerator({ data, setData, remove, id }) {
-  const [number, setNumber] = useState<string>();
-  const [type, setType] = useState("qm");
-  const [teamNumber, setTeamNumber] = useState(["", "", "", "", "", ""]);
+  const [number, setNumber] = useState<string>(data.matchNumber || "");
+  const [type, setType] = useState(data.matchType || "qm");
+  const [teamNumber, setTeamNumber] = useState(
+    [...data.alliances.blue.teams, ...data.alliances.red.teams] || [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+    ]
+  );
   useEffect(() => {
     setData({
       id: `${id}_${type}${number}`,

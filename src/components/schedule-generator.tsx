@@ -1,19 +1,41 @@
 import { useState, useEffect } from "react";
-import { storeMatchSchedule } from "../api/local-storage";
+import {
+  getEventFromWeekAndId,
+  storeMatchSchedule,
+} from "../api/local-storage";
+import { IEvent } from "../models";
 import "../styles/schedule-generator.css";
 import MatchGenerator from "./match-generator";
 
-export default function ScheduleGenerator({ exit }) {
+export default function ScheduleGenerator({ exit, eventId, eventWeek }) {
   const [name, setName] = useState("");
   const [week, setWeek] = useState(0);
   const [matches, setMatches] = useState<any>([]);
   const [id, setId] = useState("");
+  const [isNew, setIsNew] = useState(false);
+
+  useEffect(() => {
+    getEventFromWeekAndId(eventWeek, eventId).then((selectedEvent: any) => {
+      if (
+        selectedEvent.name.substring(selectedEvent.name.length - 8) ===
+        "(Edited)"
+      ) {
+        setName(selectedEvent.name);
+        setId(selectedEvent.id);
+      } else {
+        setName(selectedEvent.name + " (Edited)");
+        setId(selectedEvent.id + "e");
+      }
+      setWeek(selectedEvent.week + 1);
+      setMatches(selectedEvent.matches);
+    });
+  }, []);
 
   function saveMatch() {
     storeMatchSchedule(week, {
       id,
       name,
-      week,
+      week: week - 1,
       matches,
     });
   }
@@ -55,13 +77,27 @@ export default function ScheduleGenerator({ exit }) {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              setId("2022" + e.target.value.replace(/\s/g, ""));
+              if (isNew) setId("2022" + e.target.value.replace(/\s/g, ""));
             }}
           />
         </div>
+        <button
+          className="btn btn-primary"
+          style={{ marginBottom: "0" }}
+          onClick={(e) => {
+            e.preventDefault();
+            setIsNew(true);
+            setWeek(0);
+            setMatches([]);
+            setName("");
+            setId("");
+          }}
+        >
+          New
+        </button>
       </form>
       <hr />
-      <div>
+      <div id="match-input-div">
         {matches.map((e, i) => (
           <MatchGenerator
             key={i}

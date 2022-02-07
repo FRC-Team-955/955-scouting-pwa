@@ -62,10 +62,21 @@ export async function storeMatchSchedule(week: number, data: IEvent) {
 
   const index = currentMatchList.findIndex((x: IEvent) => x.id === data.id); // removes duplicate match
   if (index > -1) currentMatchList.splice(index, 1);
-
+  console.log(data);
   set(`matchesWeek${week}`, [...currentMatchList, data]) // stores new match
     .then(() => {})
     .catch((err) => console.log("It failed!", err));
+}
+
+// loads single event based on week and id
+export async function getEventFromWeekAndId(week, id) {
+  let currentMatchList = [];
+
+  // reads currently stored matches
+  await get(`matchesWeek${week}`).then((val) =>
+    val ? (currentMatchList = val) : currentMatchList
+  );
+  return currentMatchList.find((x: IEvent) => x.id === id);
 }
 
 // loads all events for a given week

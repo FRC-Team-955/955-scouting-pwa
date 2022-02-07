@@ -107,6 +107,7 @@ export default function Dashboard() {
           lock={() => setLockDropdown(true)}
           unlock={() => setLockDropdown(false)}
           eventKey={eventKey}
+          week={week}
         />
       </div>
       <select

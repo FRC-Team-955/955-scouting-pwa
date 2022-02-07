@@ -9,6 +9,7 @@
   white-space: nowrap;
   width: 25rem !important;
   max-width: 95%;
+  max-height: 80vh;
 }
 
 #sg-div form {
@@ -32,9 +33,13 @@
 }
 
 #sg-div button {
-  margin-left: 12.5rem;
+  margin-left: 50%;
   margin-bottom: 1rem;
   transform: translate(-50%, 0);
+}
+
+#match-input-div {
+  overflow: auto;
 }
 
 .match-generator {

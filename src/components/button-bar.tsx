@@ -5,7 +5,13 @@ import { getMatchDataFirebase } from "../api/firebase-api";
 import CsvViewer from "./csv-viewer";
 import ScheduleGenerator from "./schedule-generator";
 
-export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
+export default function ButtonBar({
+  lockDropdown,
+  lock,
+  unlock,
+  eventKey,
+  week,
+}) {
   const [showCsvViewer, setShowCsvViewer] = useState(false); // wheather the csv downloader is shown
   const [showScheduleGen, setShowScheduleGen] = useState(false);
   return (
@@ -23,7 +29,12 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
           viewBox="0 0 448 512"
           height="1.599rem"
           onClick={unlock}
-          style={{ display: "inline", float: "right", marginLeft: "1rem" }}
+          style={{
+            display: "inline",
+            float: "right",
+            marginLeft: "1rem",
+            cursor: "pointer",
+          }}
         >
           <path
             fill="currentColor"
@@ -42,7 +53,12 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
           viewBox="0 0 576 512"
           height="1.599rem"
           onClick={lock}
-          style={{ display: "inline", float: "right", marginLeft: "1rem" }}
+          style={{
+            display: "inline",
+            float: "right",
+            marginLeft: "1rem",
+            cursor: "pointer",
+          }}
         >
           <path
             fill="currentColor"
@@ -68,7 +84,7 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
         viewBox="0 0 640 512"
         width="2rem"
         onClick={() => setShowCsvViewer(true)}
-        style={{ display: "inline", float: "right" }}
+        style={{ display: "inline", float: "right", cursor: "pointer" }}
       >
         <path
           fill="currentColor"
@@ -87,7 +103,12 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
         viewBox="0 0 512 512"
         height="1.599rem"
         onClick={getMatchDataFirebase}
-        style={{ display: "inline", float: "right", marginRight: "1rem" }}
+        style={{
+          display: "inline",
+          float: "right",
+          marginRight: "1rem",
+          cursor: "pointer",
+        }}
       >
         <path
           fill="currentColor"
@@ -96,7 +117,11 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
       </svg>
       {/* Calander icon to add a new schedule (not implimented) */}
       {showScheduleGen ? (
-        <ScheduleGenerator exit={() => setShowScheduleGen(false)} />
+        <ScheduleGenerator
+          exit={() => setShowScheduleGen(false)}
+          eventId={eventKey}
+          eventWeek={week}
+        />
       ) : (
         <></>
       )}
@@ -113,7 +138,12 @@ export default function ButtonBar({ lockDropdown, lock, unlock, eventKey }) {
         onClick={() => {
           setShowScheduleGen(true);
         }}
-        style={{ display: "inline", float: "right", marginRight: "1rem" }}
+        style={{
+          display: "inline",
+          float: "right",
+          marginRight: "1rem",
+          cursor: "pointer",
+        }}
       >
         <path
           fill="currentColor"
