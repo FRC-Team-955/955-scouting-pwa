@@ -16,16 +16,8 @@ export default function ScheduleGenerator({ exit, eventId, eventWeek }) {
 
   useEffect(() => {
     getEventFromWeekAndId(eventWeek, eventId).then((selectedEvent: any) => {
-      if (
-        selectedEvent.name.substring(selectedEvent.name.length - 8) ===
-        "(Edited)"
-      ) {
-        setName(selectedEvent.name);
-        setId(selectedEvent.id);
-      } else {
-        setName(selectedEvent.name + " (Edited)");
-        setId(selectedEvent.id + "e");
-      }
+      setName(selectedEvent.name);
+      setId(selectedEvent.id);
       setWeek(selectedEvent.week + 1);
       setMatches(selectedEvent.matches);
     });
@@ -78,6 +70,19 @@ export default function ScheduleGenerator({ exit, eventId, eventWeek }) {
             onChange={(e) => {
               setName(e.target.value);
               if (isNew) setId("2022" + e.target.value.replace(/\s/g, ""));
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="event-name">ID (don't change)</label>
+          <input
+            type="text"
+            className="form-control"
+            id="event-name"
+            placeholder="name"
+            value={id}
+            onChange={(e) => {
+              setId(e.target.value);
             }}
           />
         </div>

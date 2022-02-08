@@ -41,6 +41,7 @@ export default function CsvViewer({ exit, eventId }) {
           >
             Exit
           </button>
+          Event ID: {eventId}
         </div>
 
         {show ? <pre>{csvText}</pre> : <></>}

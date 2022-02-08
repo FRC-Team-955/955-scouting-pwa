@@ -2,17 +2,12 @@ import { useState, useEffect } from "react";
 import "../styles/schedule-generator.css";
 
 export default function MatchGenerator({ data, setData, remove, id }) {
-  const [number, setNumber] = useState<string>(data.matchNumber || "");
-  const [type, setType] = useState(data.matchType || "qm");
+  const [number, setNumber] = useState<string>(data?.matchNumber || "");
+  const [type, setType] = useState(data?.matchType || "qm");
   const [teamNumber, setTeamNumber] = useState(
-    [...data.alliances.blue.teams, ...data.alliances.red.teams] || [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ]
+    Object.keys(data).length > 0
+      ? [...data.alliances.blue.teams, ...data?.alliances.red.teams]
+      : ["", "", "", "", "", ""]
   );
   useEffect(() => {
     setData({
