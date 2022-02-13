@@ -16,7 +16,7 @@ import { storeMatchSchedule, loadMatchSchedules } from "../api/local-storage";
 
 import { IEvent, IMatchSchedule } from "../models";
 
-export default function Dashboard({ setSchedule }) {
+export default function Dashboard({ setEId, setEWeek }) {
   const [eventList, setEventList] = useState<Array<IEvent> | null>(); // the list of events that is rendered in the dropdown (pulled from TBA or ls)
   const [localLen, setLocalLen] = useState(0); // number of local matches in event list
   const [matchSchedule, setMatchSchedule] = useState<IMatchSchedule>([]); // the list of matches (pulled from TBA or ls)
@@ -30,11 +30,17 @@ export default function Dashboard({ setSchedule }) {
     // This function runs after the page loads or when `week` is changed. It calls ls or TBA to get the list of events for that week.
     if (navigator.onLine) {
       // runs while online
+      setEWeek(week);
       getEventsFromWeek(week).then((s) => {
         loadMatchSchedules(week).then((l) => {
-          setEventList([...s, ...l]); // add local nmatches to event list
+          if (l?.length > 0) {
+            setEventList([...s, ...l]); // add local nmatches to event list
+            setLocalLen(l.length);
+          } else {
+            setEventList(s);
+          }
+
           setEventKey(s[0].id);
-          setLocalLen(l.length);
         });
       });
     } else {
@@ -50,10 +56,10 @@ export default function Dashboard({ setSchedule }) {
     // This function runs after the page loads or when `eventKey` is changed. It calls ls or TBA to get the match schedule.
     if (navigator.onLine) {
       // runs while online
+      setEId(eventKey);
       getMatchesFromEventKey(eventKey)
         .then((s) => {
           setMatchSchedule(s);
-          setSchedule(s);
           getEventFromKey(eventKey).then((res) =>
             storeMatchSchedule(week, res)
           ); // stores selected match in ls
@@ -72,7 +78,6 @@ export default function Dashboard({ setSchedule }) {
         : [];
       if (s.length > 0) {
         setMatchSchedule(s);
-        setSchedule(s);
       } // if we have a match, set the match schedule
     }
     // eslint-disable-next-line

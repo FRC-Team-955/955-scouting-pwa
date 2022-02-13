@@ -12,7 +12,12 @@ export async function generateCSV(eventId) {
   );
   let csvData = currentData.map(
     (data: ITeamData) =>
-      `${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.climb}`
+      `${data.id},${data.id.substring(
+        data.id.indexOf("_") + 1,
+        data.id.indexOf("-")
+      )},${data.teamNumber},${data.taxi ? 1 : 0},${data.autoLow},${
+        data.autoHigh
+      },${data.telopLow},${data.telopHigh},${data.climb}`
   );
   return csvData.join("\n");
 }
@@ -51,6 +56,54 @@ export async function getMatchData() {
   return currentData;
 }
 
+//returns an array of avg data objects for a givin list of teams
+export async function getAvgDataFromTeamList(teamList) {
+  let currentData = [];
+  // reads currently stored data
+  await get("data").then((val) => (val ? (currentData = val) : currentData)); // get all match data
+  currentData = currentData.filter(
+    (
+      x: ITeamData // filter out uneeded teams
+    ) => teamList.includes(x.teamNumber)
+  );
+
+  let out: any = [];
+  if (currentData.length > 0) {
+    teamList.forEach((e) => {
+      // avg data by team
+      out.push({
+        id: `${e}Avg`,
+        teamNumber: e,
+        taxi: 0,
+        autoLow: 0,
+        autoHigh: 0,
+        telopLow: 0,
+        telopHigh: 0,
+        climb: 0,
+      });
+      let tempArr = currentData.filter((x: ITeamData) => x.teamNumber === e);
+      if (tempArr.length > 0) {
+        // sum data
+        tempArr.forEach((f: ITeamData) => {
+          out[out.length - 1].taxi += f.taxi;
+          out[out.length - 1].autoLow += f.autoLow;
+          out[out.length - 1].autoHigh += f.autoHigh;
+          out[out.length - 1].telopLow += f.telopLow;
+          out[out.length - 1].telopHigh += f.telopHigh;
+          out[out.length - 1].climb += f.climb;
+        });
+        out[out.length - 1].taxi /= tempArr.length; // divide
+        out[out.length - 1].autoLow /= tempArr.length;
+        out[out.length - 1].autoHigh /= tempArr.length;
+        out[out.length - 1].telopLow /= tempArr.length;
+        out[out.length - 1].telopHigh /= tempArr.length;
+        out[out.length - 1].climb /= tempArr.length;
+      }
+    });
+  }
+  return out;
+}
+
 // stores an event (matchSchedule) when given a week and the actual schedule
 export async function storeMatchSchedule(week: number, data: IEvent) {
   let currentMatchList = [];
@@ -62,7 +115,6 @@ export async function storeMatchSchedule(week: number, data: IEvent) {
 
   const index = currentMatchList.findIndex((x: IEvent) => x.id === data.id); // removes duplicate match
   if (index > -1) currentMatchList.splice(index, 1);
-  console.log(data);
   set(`matchesWeek${week}`, [...currentMatchList, data]) // stores new match
     .then(() => {})
     .catch((err) => console.log("It failed!", err));
