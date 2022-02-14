@@ -78,7 +78,7 @@ export interface IMatch {
 export interface IMatchAlliance {
   score?: number;
   teams: Array<number>;
-  data: Array<ITeamData>; 
+  data: Array<ITeamData>;
 }
 
 export interface ITeamData {
@@ -89,5 +89,7 @@ export interface ITeamData {
   autoHigh: number;
   telopLow: number;
   telopHigh: number;
+  defense: number;
   climb: number;
+  notes: string;
 }

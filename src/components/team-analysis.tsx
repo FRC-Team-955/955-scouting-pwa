@@ -39,6 +39,9 @@ export default function TeamAnalysis({ data, exit }) {
             <label>balls in high: {data.telopHigh}</label>
           </div>
           <div className="form-group">
+            <label>defense: {data.defense}</label>
+          </div>
+          <div className="form-group">
             <label>level of climb: {data.climb}</label>
           </div>
         </div>

@@ -17,7 +17,9 @@ export async function generateCSV(eventId) {
         data.id.indexOf("-")
       )},${data.teamNumber},${data.taxi ? 1 : 0},${data.autoLow},${
         data.autoHigh
-      },${data.telopLow},${data.telopHigh},${data.climb}`
+      },${data.telopLow},${data.telopHigh},${data.defense},${data.climb},${
+        data.notes
+      }`
   );
   return csvData.join("\n");
 }
@@ -79,6 +81,7 @@ export async function getAvgDataFromTeamList(teamList) {
         autoHigh: 0,
         telopLow: 0,
         telopHigh: 0,
+        defense: 0,
         climb: 0,
       });
       let tempArr = currentData.filter((x: ITeamData) => x.teamNumber === e);
@@ -90,6 +93,7 @@ export async function getAvgDataFromTeamList(teamList) {
           out[out.length - 1].autoHigh += f.autoHigh;
           out[out.length - 1].telopLow += f.telopLow;
           out[out.length - 1].telopHigh += f.telopHigh;
+          out[out.length - 1].defense += f.defense;
           out[out.length - 1].climb += f.climb;
         });
         out[out.length - 1].taxi /= tempArr.length; // divide
@@ -97,6 +101,7 @@ export async function getAvgDataFromTeamList(teamList) {
         out[out.length - 1].autoHigh /= tempArr.length;
         out[out.length - 1].telopLow /= tempArr.length;
         out[out.length - 1].telopHigh /= tempArr.length;
+        out[out.length - 1].defense /= tempArr.length;
         out[out.length - 1].climb /= tempArr.length;
       }
     });

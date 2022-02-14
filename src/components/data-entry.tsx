@@ -21,7 +21,9 @@ export default function DataEntry({
   const [autoHigh, setAutoHigh] = useState(data?.autoHigh || 0);
   const [telopLow, setTelopLow] = useState(data?.telopLow || 0);
   const [telopHigh, setTelopHigh] = useState(data?.telopHigh || 0);
+  const [defense, setDefense] = useState(data?.defense || 0);
   const [climb, setClimb] = useState(data?.climb || 0);
+  const [notes, setNotes] = useState(data?.notes || "");
 
   function saveData(e, forceSave = true) {
     e?.preventDefault();
@@ -44,7 +46,9 @@ export default function DataEntry({
         autoHigh,
         telopLow,
         telopHigh,
+        defense,
         climb,
+        notes,
       });
       // if x was pressed and user is online send data to firebase
       if (!forceSave && navigator.onLine) {
@@ -56,7 +60,9 @@ export default function DataEntry({
           autoHigh,
           telopLow,
           telopHigh,
+          defense,
           climb,
+          notes,
         });
       }
     }
@@ -199,6 +205,30 @@ export default function DataEntry({
             </div>
           </div>
           <div className="form-group">
+            <label htmlFor="defense-telop">defense (0-2): </label>
+            <div className="data-form-inputs" id="defense-telop">
+              <button
+                className="btn btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setDefense(Math.max(defense - 1, 0));
+                }}
+              >
+                -
+              </button>
+              <span>{defense}</span>
+              <button
+                className="btn btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setDefense(Math.min(defense + 1, 2));
+                }}
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div className="form-group">
             <label htmlFor="climb-telop">level of climb: </label>
             <div className="data-form-inputs" id="climb-telop">
               <button
@@ -220,6 +250,19 @@ export default function DataEntry({
               >
                 +
               </button>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="notes">notes (130 chars): </label>
+            <br />
+            <div className="data-form-inputs" id="notes">
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value.replaceAll(",", ";"))}
+                maxLength={130}
+                rows={4}
+                cols={35}
+              />
             </div>
           </div>
         </div>

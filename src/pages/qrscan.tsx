@@ -30,7 +30,9 @@ export function QRScan() {
         autoHigh: parseInt(dataArr[4]),
         telopLow: parseInt(dataArr[5]),
         telopHigh: parseInt(dataArr[6]),
-        climb: parseInt(dataArr[7]),
+        defense: parseInt(dataArr[7]),
+        climb: parseInt(dataArr[8]),
+        notes: dataArr[9],
       });
       await sendMatchDataFirebase({
         id: dataArr[0],
@@ -40,7 +42,9 @@ export function QRScan() {
         autoHigh: parseInt(dataArr[4]),
         telopLow: parseInt(dataArr[5]),
         telopHigh: parseInt(dataArr[6]),
-        climb: parseInt(dataArr[7]),
+        defense: parseInt(dataArr[7]),
+        climb: parseInt(dataArr[8]),
+        notes: dataArr[9],
       });
     }
   }

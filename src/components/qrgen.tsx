@@ -20,7 +20,7 @@ export default function QRgen({ exit, data }) {
     if (data?.teamNumber)
       generateQR(
         // converts from data object to string
-        `${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.climb}`
+        `${data.id},${data.teamNumber},${data.taxi},${data.autoLow},${data.autoHigh},${data.telopLow},${data.telopHigh},${data.defense},${data.climb}, ${data.notes}`
       );
   }, [data]);
 
