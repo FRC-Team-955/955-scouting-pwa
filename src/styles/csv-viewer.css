@@ -16,3 +16,13 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+#csv-viewer-div svg {
+  width: 1rem;
+  float: right;
+  cursor: pointer;
+}
+
+#csv-viewer-div button {
+  margin-bottom: 0.5rem;
+}

@@ -5,3 +5,13 @@
   transform: translate(-50%, 50%);
   z-index: 100;
 }
+
+.qrcard img {
+  width: 100%;
+}
+
+.qrcard svg {
+  width: 1rem;
+  float: right;
+  cursor: pointer;
+}

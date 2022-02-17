@@ -1,5 +1,5 @@
 import { get, set } from "idb-keyval";
-import { IEvent, ITeamData } from "../models";
+import { IEvent, ITeamData, IMatch } from "../models";
 
 // gets all scouting data for a current event and puts that into csv form
 export async function generateCSV(eventId) {
@@ -22,6 +22,16 @@ export async function generateCSV(eventId) {
       }`
   );
   return csvData.join("\n");
+}
+
+export async function generateScheduleCSV(eventId, week) {
+  return getEventFromWeekAndId(week, eventId).then((res: any) => {
+    let csvData = res.matches.map(
+      (data: IMatch) =>
+        `${data.id},${data.matchType},${data.matchNumber},${data.alliances.blue.teams[0]},${data.alliances.blue.teams[1]},${data.alliances.blue.teams[2]},${data.alliances.red.teams[0]},${data.alliances.red.teams[1]},${data.alliances.red.teams[2]}`
+    );
+    return csvData.join("\n");
+  });
 }
 
 // stores scouter data for one match

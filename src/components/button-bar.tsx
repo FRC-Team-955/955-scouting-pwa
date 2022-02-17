@@ -69,7 +69,11 @@ export default function ButtonBar({
 
       {/* Cloud icon to show/hide csv downloader */}
       {showCsvViewer ? (
-        <CsvViewer exit={() => setShowCsvViewer(false)} eventId={eventKey} />
+        <CsvViewer
+          exit={() => setShowCsvViewer(false)}
+          eventId={eventKey}
+          week={week}
+        />
       ) : (
         <></>
       )}
