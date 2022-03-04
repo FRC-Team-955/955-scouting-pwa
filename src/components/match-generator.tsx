@@ -58,7 +58,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           type="number"
           value={teamNumber[0]}
           onChange={(e) =>
-            setTeamNumber([e.target.value, ...teamNumber.slice(1)])
+            setTeamNumber([parseInt(e.target.value), ...teamNumber.slice(1)])
           }
           placeholder="Blue #1"
         />
@@ -70,7 +70,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           onChange={(e) =>
             setTeamNumber([
               ...teamNumber.slice(0, 1),
-              e.target.value,
+              parseInt(e.target.value),
               ...teamNumber.slice(2),
             ])
           }
@@ -84,7 +84,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           onChange={(e) =>
             setTeamNumber([
               ...teamNumber.slice(0, 2),
-              e.target.value,
+              parseInt(e.target.value),
               ...teamNumber.slice(3),
             ])
           }
@@ -100,7 +100,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           onChange={(e) =>
             setTeamNumber([
               ...teamNumber.slice(0, 3),
-              e.target.value,
+              parseInt(e.target.value),
               ...teamNumber.slice(4),
             ])
           }
@@ -114,7 +114,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           onChange={(e) =>
             setTeamNumber([
               ...teamNumber.slice(0, 4),
-              e.target.value,
+              parseInt(e.target.value),
               ...teamNumber.slice(5),
             ])
           }
@@ -126,7 +126,7 @@ export default function MatchGenerator({ data, setData, remove, id }) {
           type="number"
           value={teamNumber[5]}
           onChange={(e) =>
-            setTeamNumber([...teamNumber.slice(0, 5), e.target.value])
+            setTeamNumber([...teamNumber.slice(0, 5), parseInt(e.target.value)])
           }
           placeholder="Red #3"
         />

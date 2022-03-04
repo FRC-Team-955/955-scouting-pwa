@@ -25,11 +25,10 @@ export default function DataEntry({
   const [climb, setClimb] = useState(data?.climb || 0);
   const [notes, setNotes] = useState(data?.notes || "");
 
-  function saveData(e, forceSave = true) {
+  function saveData(e) {
     e?.preventDefault();
     // if save data was clicked or data was entered, save the data
     if (
-      forceSave ||
       taxi !== false ||
       autoLow !== 0 ||
       autoHigh !== 0 ||
@@ -51,20 +50,20 @@ export default function DataEntry({
         notes,
       });
       // if x was pressed and user is online send data to firebase
-      if (!forceSave && navigator.onLine) {
-        sendMatchDataFirebase({
-          id: `${matchId}-${data.teamNumber.toString()}`,
-          teamNumber: data.teamNumber,
-          taxi,
-          autoLow,
-          autoHigh,
-          telopLow,
-          telopHigh,
-          defense,
-          climb,
-          notes,
-        });
-      }
+      // if (navigator.onLine) {
+      //   sendMatchDataFirebase({
+      //     id: `${matchId}-${data.teamNumber.toString()}`,
+      //     teamNumber: data.teamNumber,
+      //     taxi,
+      //     autoLow,
+      //     autoHigh,
+      //     telopLow,
+      //     telopHigh,
+      //     defense,
+      //     climb,
+      //     notes,
+      //   });
+      // }
     }
   }
 
@@ -75,7 +74,7 @@ export default function DataEntry({
           Match {matchNumber}: {data.teamNumber}
           <svg
             onClick={() => {
-              saveData(null, false);
+              saveData(null);
               exit();
             }}
             viewBox="0 0 320 512"

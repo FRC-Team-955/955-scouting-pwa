@@ -8,7 +8,7 @@ import { useState } from "react";
 
 function App() {
   const [eventId, setEventId] = useState("");
-  const [eventWeek, setEventWeek] = useState(0);
+  const [eventWeek, setEventWeek] = useState(1);
 
   return (
     <BrowserRouter>
@@ -17,6 +17,8 @@ function App() {
           path="/955-scouting-pwa"
           element={
             <Dashboard
+              appWeek={eventWeek}
+              appKey={eventId}
               setEWeek={(w) => setEventWeek(w)}
               setEId={(id) => setEventId(id)}
             />

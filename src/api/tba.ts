@@ -1,6 +1,6 @@
 // https://www.thebluealliance.com/apidocs/v3
 // https://www.thebluealliance.com/api/v3/
-// All data is from 2020 because 2022 data is not complete
+// All data is from 2022 because 2022 data is not complete
 
 const header = {
   headers: {
@@ -10,9 +10,9 @@ const header = {
 };
 const api = "https://www.thebluealliance.com/api/v3";
 
-// returns a list of events in 2020 for a given week
+// returns a list of events in 2022 for a given week
 export async function getEventsFromWeek(week: number) {
-  const eventList = await fetch(`${api}/events/2020`, header)
+  const eventList = await fetch(`${api}/events/2022`, header)
     .then((res) => res.json())
     .then(
       (result) => {
@@ -69,9 +69,12 @@ export async function getMatchesFromEventKey(key: string) {
         return arr;
       },
       (error) => {
-        console.log(error);
+        throw new Error("match not found of TBA tba.ts: line 72");
       }
-    );
+    )
+    .catch((err) => {
+      throw Error(err);
+    });
 
   return matchArray.map((e) => {
     // changes data shape
