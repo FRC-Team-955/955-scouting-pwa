@@ -12,7 +12,7 @@ const api = "https://www.thebluealliance.com/api/v3";
 
 // returns a list of events in 2020 for a given week
 export async function getEventsFromWeek(week: number) {
-  const eventList = await fetch(`${api}/events/2020`, header)
+  const eventList = await fetch(`${api}/events/2022`, header)
     .then((res) => res.json())
     .then(
       (result) => {
