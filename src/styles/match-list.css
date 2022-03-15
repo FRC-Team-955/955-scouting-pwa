@@ -1,0 +1,14 @@
+.matches {
+  width: 4.1875rem;
+  height: 1.1875rem;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+
+  margin-left: 1rem;
+
+  color: #000000;
+}

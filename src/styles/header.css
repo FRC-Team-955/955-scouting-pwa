@@ -1,0 +1,33 @@
+#week-select {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: url("./images/caret-down.png") no-repeat 100% 50%;
+  display: block;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.816rem;
+  width: 6.75rem;
+  padding: 0;
+  display: inline;
+}
+
+#event-select {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: url("./images/caret-down.png") no-repeat 100% 50%;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 0.908rem;
+
+  max-width: 90%;
+  white-space: pre-wrap;
+
+  margin-left: 1rem;
+  margin-top: 1rem;
+  padding-right: 2rem;
+  display: inline;
+}

@@ -1,14 +1,11 @@
+import Nav from "../components/nav";
 import { useEffect } from "react";
 import "../styles/qrscan.css";
-
-import Nav from "../components/nav";
 import { Html5QrcodeScanner } from "html5-qrcode"; //https://www.npmjs.com/package/html5-qrcode
 import { storeMatchData } from "../api/local-storage";
-import { sendMatchDataFirebase } from "../api/firebase-api";
 
-export function QRScan() {
+function QRScan() {
   let html5QrcodeScanner;
-
   useEffect(() => {
     html5QrcodeScanner = new Html5QrcodeScanner(
       "qr-reader",
@@ -34,18 +31,6 @@ export function QRScan() {
         climb: parseInt(dataArr[8]),
         notes: dataArr[9],
       });
-      await sendMatchDataFirebase({
-        id: dataArr[0],
-        teamNumber: parseInt(dataArr[1]),
-        taxi: dataArr[2] === "true",
-        autoLow: parseInt(dataArr[3]),
-        autoHigh: parseInt(dataArr[4]),
-        telopLow: parseInt(dataArr[5]),
-        telopHigh: parseInt(dataArr[6]),
-        defense: parseInt(dataArr[7]),
-        climb: parseInt(dataArr[8]),
-        notes: dataArr[9],
-      });
     }
   }
 
@@ -53,7 +38,6 @@ export function QRScan() {
     // function runs after you FAIL
     // let's just ingnore these :P
   }
-
   return (
     <div id="qr-div">
       <h2 id="qr-title">
@@ -64,3 +48,5 @@ export function QRScan() {
     </div>
   );
 }
+
+export default QRScan;

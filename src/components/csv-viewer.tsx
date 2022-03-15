@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { generateCSV, generateScheduleCSV } from "../api/local-storage";
-
 import "../styles/csv-viewer.css";
 
-export default function CsvViewer({ exit, eventId, week }) {
+function CsvView({ exit, eventId }) {
   const [csvText, setCsvText] = useState("");
   const [csvScheduleText, setScheduleCsvText] = useState("");
   const [show, setShow] = useState(false);
   const [showS, setShowS] = useState(false);
+
   useEffect(() => {
     generateCSV(eventId).then((data) => setCsvText(data)); // gets data from local storage
-    generateScheduleCSV(eventId, week).then((data) => setScheduleCsvText(data)); // gets data from local storage
+    generateScheduleCSV(eventId).then((data) => setScheduleCsvText(data)); // gets data from local storage
   }, []);
 
   function downloadFile(): any {
@@ -34,7 +34,6 @@ export default function CsvViewer({ exit, eventId, week }) {
     document.body.appendChild(element);
     element.click();
   }
-
   return (
     <div className="card" id="csv-viewer-div" style={{ width: "18rem" }}>
       <div className="card-body">
@@ -77,3 +76,5 @@ export default function CsvViewer({ exit, eventId, week }) {
     </div>
   );
 }
+
+export default CsvView;

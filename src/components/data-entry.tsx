@@ -1,91 +1,81 @@
-import { useState } from "react";
-import { sendMatchDataFirebase } from "../api/firebase-api";
-import { storeMatchData } from "../api/local-storage";
+import { useState, useContext, useEffect } from "react";
+import { loadMatchData, storeMatchData } from "../api/local-storage";
+import { HasData } from "../context";
 import "../styles/data-entry.css";
 
-interface dataEntryProps {
-  exit: Function;
-  data: any;
-  matchNumber: number;
-  matchId: string;
-}
-
-export default function DataEntry({
+function DataEntry({
   exit,
-  matchNumber,
+  hasDataIndex,
+  teamNumber,
   matchId,
-  data,
-}: dataEntryProps) {
-  const [taxi, setTaxi] = useState(data?.taxi || false); // the `x || x` syntax means set the default state to previously stored data or 0
-  const [autoLow, setAutoLow] = useState(data?.autoLow || 0);
-  const [autoHigh, setAutoHigh] = useState(data?.autoHigh || 0);
-  const [telopLow, setTelopLow] = useState(data?.telopLow || 0);
-  const [telopHigh, setTelopHigh] = useState(data?.telopHigh || 0);
-  const [defense, setDefense] = useState(data?.defense || 0);
-  const [climb, setClimb] = useState(data?.climb || 0);
-  const [notes, setNotes] = useState(data?.notes || "");
+}: {
+  exit: any;
+  hasDataIndex: number;
+  teamNumber: number;
+  matchId: string;
+}) {
+  const { hasData, setHasData } = useContext(HasData);
+  const [taxi, setTaxi] = useState(false);
+  const [autoLow, setAutoLow] = useState(0);
+  const [autoHigh, setAutoHigh] = useState(0);
+  const [telopLow, setTelopLow] = useState(0);
+  const [telopHigh, setTelopHigh] = useState(0);
+  const [defense, setDefense] = useState(0);
+  const [climb, setClimb] = useState(0);
+  const [notes, setNotes] = useState("");
 
-  function saveData(e) {
-    e?.preventDefault();
-    // if save data was clicked or data was entered, save the data
-    if (
-      taxi !== false ||
-      autoLow !== 0 ||
-      autoHigh !== 0 ||
-      telopLow !== 0 ||
-      telopHigh !== 0 ||
-      climb !== 0
-    ) {
-      // puts match data into loacl storage
-      storeMatchData({
-        id: `${matchId}-${data.teamNumber.toString()}`,
-        teamNumber: data.teamNumber,
-        taxi,
-        autoLow,
-        autoHigh,
-        telopLow,
-        telopHigh,
-        defense,
-        climb,
-        notes,
-      });
-      // if x was pressed and user is online send data to firebase
-      // if (navigator.onLine) {
-      //   sendMatchDataFirebase({
-      //     id: `${matchId}-${data.teamNumber.toString()}`,
-      //     teamNumber: data.teamNumber,
-      //     taxi,
-      //     autoLow,
-      //     autoHigh,
-      //     telopLow,
-      //     telopHigh,
-      //     defense,
-      //     climb,
-      //     notes,
-      //   });
-      // }
-    }
+  function storeData() {
+    const newHasData = [...hasData];
+    newHasData[hasDataIndex] = true;
+    setHasData(newHasData);
+    storeMatchData({
+      id: `${matchId}-${teamNumber.toString()}*${hasDataIndex}`,
+      teamNumber: teamNumber,
+      taxi,
+      autoLow,
+      autoHigh,
+      telopLow,
+      telopHigh,
+      defense,
+      climb,
+      notes,
+    });
   }
+
+  useEffect(() => {
+    if (hasData[hasDataIndex]) {
+      loadMatchData(`${matchId}-${teamNumber.toString()}*${hasDataIndex}`).then(
+        (res: any) => {
+          setTaxi(res.taxi);
+          setAutoLow(res.autoLow);
+          setAutoHigh(res.autoHigh);
+          setTelopLow(res.telopLow);
+          setTelopHigh(res.telopHigh);
+          setDefense(res.defense);
+          setClimb(res.climb);
+          setNotes(res.notes);
+        }
+      );
+    }
+  }, [hasData, hasDataIndex, matchId, teamNumber]);
 
   return (
     <div className="card data-card">
-      <div className="card-body">
-        <h3>
-          Match {matchNumber}: {data.teamNumber}
-          <svg
-            onClick={() => {
-              saveData(null);
-              exit();
-            }}
-            viewBox="0 0 320 512"
-          >
-            <path
-              fill="currentColor"
-              d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
-            ></path>
-          </svg>
-        </h3>
-      </div>
+      <h3 className="card-body">
+        {teamNumber}
+        <svg
+          onClick={() => {
+            exit();
+            storeData();
+          }}
+          viewBox="0 0 320 512"
+        >
+          <path
+            fill="currentColor"
+            d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+          ></path>
+        </svg>
+      </h3>
       <form>
         <div className="data-group">
           <h5>Auto</h5>
@@ -96,6 +86,7 @@ export default function DataEntry({
               placeholder="taxi"
               id="taxi-check"
               defaultChecked={taxi}
+              checked={taxi}
               onChange={(e) => setTaxi(e.target.checked)}
             />
             <label className="form-check-label" htmlFor="taxi-check">
@@ -265,10 +256,9 @@ export default function DataEntry({
             </div>
           </div>
         </div>
-        <button className="btn btn-primary" onClick={saveData}>
-          Save Data
-        </button>
       </form>
     </div>
   );
 }
+
+export default DataEntry;
