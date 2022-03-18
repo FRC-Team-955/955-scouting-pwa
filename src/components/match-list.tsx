@@ -16,7 +16,7 @@ function MatchList() {
   const { setHasData } = useContext(HasData);
 
   useEffect(() => {
-    if (!navigator.onLine) {
+    if (navigator.onLine) {
       getMatchesFromEventKey(selectedEvent.id).then((res) => {
         setMatches(res);
         storeMatches(res, selectedEvent.id);
