@@ -47,6 +47,9 @@ function TeamButton({
       <button
         className={color === "blue" ? "bluebutton" : "redbutton"}
         style={{
+          display: 'flex',
+          justifyContent:'space-between',
+          alignItems:'center',
           background:
             hasData[hasDataIndex] && color === "blue"
               ? "rgba(47, 128, 237, 0.1)"

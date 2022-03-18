@@ -19,6 +19,12 @@ export default function Nav({ selectedPage }) {
           </Link>
           <p className="navtext">Scouting</p>
         </div>
+        <div className={`nav-frame ${selectedPage !== 2 ? "nav-gray" : ""}`}>
+          <Link to="/955-scouting-pwa/offline">
+            <img className="nav-icon" src={penImage} alt="" />
+          </Link>
+          <p className="navtext">Offline</p>
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { SelectedWeek, SelectedEvent, HasData } from "./context";
 import QRScan from "./pages/qr-scan";
+import Offline from "./pages/offline";
 
 function App() {
   const [week, setWeek] = useState(1);
@@ -25,6 +26,7 @@ function App() {
             <Routes>
               <Route path="/955-scouting-pwa" element={<Dashboard />} />
               <Route path="/955-scouting-pwa/qrscan" element={<QRScan />} />
+              <Route path="/955-scouting-pwa/offline" element={<Offline />} />
             </Routes>
           </BrowserRouter>
         </HasData.Provider>
