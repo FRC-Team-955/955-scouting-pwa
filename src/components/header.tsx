@@ -10,13 +10,16 @@ function Header() {
   let { week, setWeek } = useContext(SelectedWeek);
   let { selectedEvent, setSelectedEvent } = useContext(SelectedEvent);
   const [eventList, setEventList] = useState([]);
-  const [eventKey, setEventKey] = useState(selectedEvent.id);
+  const [eventKey, setEventKey] = useState(selectedEvent?.id || "");
 
   useEffect(() => {
     if (navigator.onLine) {
       getEventsFromWeek(week).then((res) => setEventList(res));
     } else {
-      getLocalEventsFromWeek(week).then((res) => setEventList(res));
+      getLocalEventsFromWeek(week).then((res) => {
+        setEventList(res);
+        console.log(res);
+      });
     }
   }, [week]);
 
@@ -27,7 +30,10 @@ function Header() {
         storeEvent(res);
       });
     } else {
-      setSelectedEvent(eventList.find((x: IEvent) => x.id === eventKey));
+      console.log("test");
+      if (eventList.find((x: IEvent) => x.id === eventKey) !== undefined) {
+        setSelectedEvent(eventList.find((x: IEvent) => x.id === eventKey));
+      }
     }
   }, [eventKey, eventList, setSelectedEvent]);
 
@@ -41,7 +47,6 @@ function Header() {
       >
         <select
           value={week}
-          defaultValue={week}
           id="week-select"
           onChange={(e) => {
             setWeek(parseInt(e.target.value));
@@ -58,7 +63,6 @@ function Header() {
       </div>
       <select
         value={selectedEvent.id}
-        defaultValue={selectedEvent.id}
         name="Event"
         id="event-select"
         onChange={(m) => setEventKey(m.target.value)}

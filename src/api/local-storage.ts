@@ -51,10 +51,10 @@ export async function storeMatches(matches: IMatchSchedule, id: string) {
 }
 
 export async function getLocalEventsFromWeek(week: number) {
-  let data = [];
-  get("localEvents").then((val) => (data = val));
-  data = data.filter((e: any) => e.week === week - 1);
-  return data;
+  return get("localEvents").then((val) => {
+    val = val.filter((e: any) => e.week === week - 1);
+    return val;
+  });
 }
 
 export async function getLocalMatchesFromEventKey(key: string) {
