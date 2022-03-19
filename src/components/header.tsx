@@ -14,7 +14,10 @@ function Header() {
 
   useEffect(() => {
     if (navigator.onLine) {
-      getEventsFromWeek(week).then((res) => setEventList(res));
+      getEventsFromWeek(week).then((res) => {
+        setEventList(res);
+        setEventKey(res[0].id);
+      });
     } else {
       getLocalEventsFromWeek(week).then((res) => {
         setEventList(res);
@@ -25,12 +28,12 @@ function Header() {
 
   useEffect(() => {
     if (navigator.onLine) {
+      console.log(eventKey);
       getEventFromKey(eventKey).then((res) => {
         setSelectedEvent(res);
         storeEvent(res);
       });
     } else {
-      console.log("test");
       if (eventList.find((x: IEvent) => x.id === eventKey) !== undefined) {
         setSelectedEvent(eventList.find((x: IEvent) => x.id === eventKey));
       }

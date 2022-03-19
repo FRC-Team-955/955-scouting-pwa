@@ -106,7 +106,7 @@ function Offline() {
                   <div style={{ marginBottom: "0" }}>
                     <input
                       type="radio"
-                      onClick={() => setColor(0)}
+                      onChange={() => setColor(0)}
                       checked={color === 0}
                     />{" "}
                     Red
@@ -114,7 +114,7 @@ function Offline() {
                   <div style={{ marginBottom: "0" }}>
                     <input
                       type="radio"
-                      onClick={() => setColor(3)}
+                      onChange={() => setColor(3)}
                       checked={color === 3}
                     />{" "}
                     Blue
@@ -123,21 +123,21 @@ function Offline() {
                 <div style={{ marginBottom: "0" }}>
                   <input
                     type="radio"
-                    onClick={() => setDsNumber(0)}
+                    onChange={() => setDsNumber(0)}
                     checked={dsNumber === 0}
                   />
                   1
                   <br />
                   <input
                     type="radio"
-                    onClick={() => setDsNumber(1)}
+                    onChange={() => setDsNumber(1)}
                     checked={dsNumber === 1}
                   />
                   2
                   <br />
                   <input
                     type="radio"
-                    onClick={() => setDsNumber(2)}
+                    onChange={() => setDsNumber(2)}
                     checked={dsNumber === 2}
                   />
                   3

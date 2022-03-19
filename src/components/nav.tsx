@@ -2,7 +2,6 @@ import "../styles/nav.css";
 import { Link } from "react-router-dom";
 import qrcodeImage from "../styles/images/qrcode.png";
 import penImage from "../styles/images/pen.png";
-import noConnectionImage from "../styles/images/no-signal-2223936-1870839.png";
 
 export default function Nav({ selectedPage }) {
   return (
