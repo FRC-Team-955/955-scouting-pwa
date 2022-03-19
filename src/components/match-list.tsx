@@ -40,7 +40,7 @@ function MatchList() {
   }, [selectedEvent, setHasData]);
 
   return (
-    <div>
+    <div style={{ marginBottom: "5rem" }}>
       <div className="matches">
         <p>Matches</p>
       </div>
