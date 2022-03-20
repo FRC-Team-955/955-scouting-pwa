@@ -45,12 +45,16 @@ function MatchList() {
         <p>Matches</p>
       </div>
       <div>
-        {matches.map((e: IMatch, i) => {
-          if (e.matchType === "qm") {
-            return <Match data={e} key={i} />;
-          }
-          return <></>;
-        })}
+        {matches ? (
+          matches.map((e: IMatch, i) => {
+            if (e.matchType === "qm") {
+              return <Match data={e} key={i} />;
+            }
+            return <></>;
+          })
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

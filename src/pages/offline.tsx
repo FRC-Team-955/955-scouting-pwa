@@ -6,7 +6,7 @@ import { SelectedEvent } from "../context";
 import { transform } from "typescript";
 
 function Offline() {
-  const { selectedEvent } = useContext(SelectedEvent);
+  const { selectedEvent, setSelectedEvent } = useContext(SelectedEvent);
   const [taxi, setTaxi] = useState(false);
   const [autoLow, setAutoLow] = useState(0);
   const [autoHigh, setAutoHigh] = useState(0);
@@ -31,13 +31,9 @@ function Offline() {
   }
 
   function storeData() {
-    const id = `${
-      selectedEvent.id + matchNumber.toString()
-    }-${teamNumber.toString()}*${(matchNumber - 1) * 6 + color + dsNumber}`;
-    generateQR(
-      `${id},${teamNumber},${taxi},${autoLow},${autoHigh},${telopLow},${telopHigh},${defense},${climb}, ${notes}`
-    );
-    setShowQR(true);
+    const id = `${selectedEvent.id}_qm${matchNumber}-${teamNumber.toString()}*${
+      (matchNumber - 1) * 6 + color + dsNumber
+    }`;
     storeMatchData({
       id,
       teamNumber: teamNumber,
@@ -50,6 +46,11 @@ function Offline() {
       climb,
       notes,
     });
+    generateQR(
+      `${id},${teamNumber},${taxi},${autoLow},${autoHigh},${telopLow},${telopHigh},${defense},${climb}, ${notes}`
+    );
+    setShowQR(true);
+    console.log(id);
   }
 
   return (
@@ -65,14 +66,22 @@ function Offline() {
             <div className="data-group">
               <h5>Info</h5>
               <div className="form-group">
-                <label htmlFor="team-number">Team Number: </label>
+                <label htmlFor="team-number">Event ID: </label>
                 <div className="data-form-inputs" id="team-number">
                   <input
                     type="text"
-                    value={teamNumber}
-                    onChange={(e) =>
-                      setTeamNumber(parseInt(e.target.value) || 0)
-                    }
+                    value={selectedEvent.id}
+                    onChange={(e) => setSelectedEvent({ id: e.target.value })}
+                  ></input>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="team-number">Team Number: </label>
+                <div className="data-form-inputs" id="team-number">
+                  <input
+                    type="number"
+                    value={teamNumber === 0 ? "" : teamNumber}
+                    onChange={(e) => setTeamNumber(parseInt(e.target.value))}
                   ></input>
                 </div>
               </div>
@@ -80,11 +89,9 @@ function Offline() {
                 <label htmlFor="match-number">Match Number: </label>
                 <div className="data-form-inputs" id="match-number">
                   <input
-                    type="text"
-                    value={matchNumber}
-                    onChange={(e) =>
-                      setMatchNumber(parseInt(e.target.value) || 0)
-                    }
+                    type="number"
+                    value={matchNumber === 0 ? "" : matchNumber}
+                    onChange={(e) => setMatchNumber(parseInt(e.target.value))}
                   ></input>
                 </div>
               </div>

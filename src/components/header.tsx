@@ -9,7 +9,6 @@ import ButtonBar from "./button-bar";
 
 import { IEvent } from "../models";
 
-
 function Header() {
   const { week, setWeek } = useContext(SelectedWeek); // global state of selected week
   const { selectedEvent, setSelectedEvent } = useContext(SelectedEvent); // global state of selected match
@@ -18,27 +17,36 @@ function Header() {
 
   // Use effect is a react hook that runs after the page is rendered. It's usually used for API calls or code with side effects.
   useEffect(() => {
-    if (navigator.onLine) { // if connected to internet
-      getEventsFromWeek(week).then((res) => { // get a list events from TBA for a given week
+    if (navigator.onLine) {
+      // if connected to internet
+      getEventsFromWeek(week).then((res) => {
+        // get a list events from TBA for a given week
         setEventList(res);
-        setEventKey(res[0].id);
+        setEventKey(selectedEvent?.id || res[0].id);
       });
-    } else { // if offline
-      getLocalEventsFromWeek(week).then((res) => { // load the list of locally stored event
+    } else {
+      // if offline
+      getLocalEventsFromWeek(week).then((res) => {
+        // load the list of locally stored event
         setEventList(res);
+        setEventKey(selectedEvent?.id || res[0].id);
       });
     }
   }, [week]); // This is a dependency array. This function will rerun once the value of week changes. If there is no array, function will run on every rerender.
 
   useEffect(() => {
-    if (navigator.onLine) { // if connected to internet
+    if (navigator.onLine) {
+      // if connected to internet
       //TODO: change this to pull from event list (see below)
-      getEventFromKey(eventKey).then((res) => { // the select only remembers the event key so we need to reload to get the rest of the event data
+      getEventFromKey(eventKey).then((res) => {
+        // the select only remembers the event key so we need to reload to get the rest of the event data
         setSelectedEvent(res);
         storeEvent(res); // store the event locally
       });
-    } else { // if offline
-      if (eventList.find((x: IEvent) => x.id === eventKey) !== undefined) { // if selected event key is in eventList
+    } else {
+      // if offline
+      if (eventList.find((x: IEvent) => x.id === eventKey) !== undefined) {
+        // if selected event key is in eventList
         setSelectedEvent(eventList.find((x: IEvent) => x.id === eventKey));
       }
     }
@@ -68,7 +76,7 @@ function Header() {
           <option value={6}>Week 6</option>
         </select>
         {/* button to download data */}
-        <ButtonBar eventKey={eventKey} /> 
+        <ButtonBar eventKey={eventKey} />
       </div>
       {/* Match select */}
       <select

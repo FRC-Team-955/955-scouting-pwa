@@ -12,7 +12,7 @@
   padding: 0 1rem;
 }
 
-.data-card label {
+.data-group label {
   margin-right: 0.5rem;
 }
 
@@ -38,7 +38,8 @@
 
 .data-form-inputs .btn {
   font-family: Inter;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  width: 3rem;
 }
 
 .data-form-inputs span {
