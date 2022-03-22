@@ -350,6 +350,25 @@ function Offline() {
                 </svg>
                 <h4>Team: {teamNumber}</h4>
                 <img src={qr} alt=""></img>
+                <button
+                  className="btn btn-primary"
+                  style={{ marginLeft: "3.2rem", marginTop: "0rem" }}
+                  onClick={() => {
+                    setTaxi(false);
+                    setAutoLow(0);
+                    setAutoHigh(0);
+                    setTelopLow(0);
+                    setTelopHigh(0);
+                    setDefense(0);
+                    setClimb(0);
+                    setNotes("");
+                    setTeamNumber(0);
+                    setMatchNumber(matchNumber + 1);
+                    setShowQR(false);
+                  }}
+                >
+                  New Match
+                </button>
               </div>
             </div>
           ) : (
