@@ -31,6 +31,7 @@ export async function getEventsFromWeek(week: number) {
   });
 }
 
+// given a event key return the IEvent object 
 export async function getEventFromKey(key: string) {
   const frcEvent = await fetch(`${api}/event/${key}`, header)
     .then((res) => res.json())
@@ -49,6 +50,7 @@ export async function getEventFromKey(key: string) {
   };
 }
 
+// return the TBA match schedule
 export async function getMatchesFromEventKey(key: string) {
   const matchArray = await fetch(`${api}/event/${key}/matches`, header)
     .then((res) => res.json())

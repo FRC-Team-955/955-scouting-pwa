@@ -22,7 +22,7 @@ function QRScan() {
   }, []);
 
   async function onScanSuccess(decodedText) {
-    // function runs after sucesfull scan of qr code
+    // function runs after successful scan of qr code
     const dataArr = decodedText.split(","); // data ended in qr is a csv string that is split into an array
     if (dataArr.length >= 8) { // check to make sure we scanned a valid code (this is not very secure, google code injection)
       await storeMatchData({ // send data to local storage

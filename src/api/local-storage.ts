@@ -1,6 +1,7 @@
 import { IEvent, IMatch, IMatchSchedule, ITeamData } from "../models";
 import { update, get, set } from "idb-keyval";
 
+//reads saved match data and returns a csv with data for a given event
 export async function generateCSV(id: string) {
   let currentData = [];
 
@@ -23,6 +24,7 @@ export async function generateCSV(id: string) {
   return csvData.join("\n");
 }
 
+// generates a schedule csv for a given event
 export async function generateScheduleCSV(id: string) {
   return getLocalMatchesFromEventKey(id).then((res: any) => {
     let csvData = res.map(
@@ -33,6 +35,7 @@ export async function generateScheduleCSV(id: string) {
   });
 }
 
+// stores the IEvent object for a selected event
 export async function storeEvent(frcEvent: IEvent) {
   update("localEvents", (val: any) => {
     let newData = val || [];
@@ -46,10 +49,12 @@ export async function storeEvent(frcEvent: IEvent) {
   });
 }
 
+// stores the match list for an event
 export async function storeMatches(matches: IMatchSchedule, id: string) {
   set(id, matches);
 }
 
+// returns a list of IEvents that we have saved locally 
 export async function getLocalEventsFromWeek(week: number) {
   return get("localEvents").then((val) => {
     val = val.filter((e: any) => e.week === week - 1);
@@ -57,10 +62,12 @@ export async function getLocalEventsFromWeek(week: number) {
   });
 }
 
+// given an event id, return a list of matches
 export async function getLocalMatchesFromEventKey(key: string) {
   return get(key).then((val) => val);
 }
 
+// store 1 team's scouting data
 export async function storeMatchData(data: ITeamData) {
   update("data", (val: any) => {
     let newData = val || [];
@@ -74,7 +81,7 @@ export async function storeMatchData(data: ITeamData) {
   });
 }
 
-//given a match id, returns all scouting data
+// given a match id, returns all scouting data
 export async function loadMatchData(id: string) {
   let currentData = [];
 
@@ -85,6 +92,7 @@ export async function loadMatchData(id: string) {
   return currentData[0];
 }
 
+// detects which data we saved locally to set the has data context
 export async function loadHasData(key: string) {
   let currentData: any = [];
   await get("data").then((val) => (val ? (currentData = val) : currentData));
